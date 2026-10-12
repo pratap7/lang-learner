@@ -6,12 +6,26 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test src/lib/__tests__/*.test.ts",
+    "test:sm2": "node --test src/lib/__tests__/sm2.test.ts",
+    "test:streak": "node --test src/lib/__tests__/streak.test.ts",
+    "test:scoring": "node --test src/lib/__tests__/scoring.test.ts",
+    "test:e2e": "node --test src/lib/__tests__/e2e-flow.test.ts"
   },
+
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^14.0.0",
+    "lucide-react": "^1.53.0",
     "next": "16.4.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "recharts": "^3.10.1",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",

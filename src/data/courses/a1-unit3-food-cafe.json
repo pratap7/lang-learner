@@ -1,0 +1,863 @@
+{
+  "unit": {
+    "id": "a1-u3-food-cafe",
+    "level": "A1",
+    "unitNumber": 3,
+    "title": "Unit 3: Food and Ordering at a Café",
+    "titleDe": "Einheit 3: Essen und Bestellen im Café",
+    "slug": "a1-u3-essen-und-bestellen-im-cafe",
+    "description": "Learn essential German food and beverage vocabulary, master polite ordering with 'möchten', navigate the accusative case for direct objects, and confidently handle payments at a German, Austrian, or Swiss café.",
+    "cefrStandard": "Goethe-Zertifikat A1: Start Deutsch 1",
+    "estimatedStudyMinutes": 90,
+    "totalXpReward": 250
+  },
+
+  "vocabulary": [
+    {
+      "id": "v-a1-u3-01",
+      "german": "der Kaffee",
+      "article": "der",
+      "plural": "die Kaffees",
+      "english": "the coffee",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈkafeː/",
+      "exampleDe": "Ich möchte bitte einen Kaffee mit Milch.",
+      "exampleEn": "I would like a coffee with milk, please.",
+      "grammarNote": "Masculine noun ('der'). In the accusative case (direct object): 'Ich möchte einen Kaffee'."
+    },
+    {
+      "id": "v-a1-u3-02",
+      "german": "der Tee",
+      "article": "der",
+      "plural": "die Tees",
+      "english": "the tea",
+      "partOfSpeech": "noun",
+      "ipa": "/teː/",
+      "exampleDe": "Trinken Sie schwarzen Tee oder Pfefferminztee?",
+      "exampleEn": "Do you drink black tea or peppermint tea?",
+      "grammarNote": "Masculine noun ('der'). Takes 'den/einen' in the accusative case."
+    },
+    {
+      "id": "v-a1-u3-03",
+      "german": "das Wasser",
+      "article": "das",
+      "plural": "die Wässer",
+      "english": "the water",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈvasɐ/",
+      "exampleDe": "Ein Glas Wasser, bitte.",
+      "exampleEn": "A glass of water, please.",
+      "grammarNote": "Neuter noun ('das'). In the accusative case, neuter articles stay identical ('das' / 'ein')."
+    },
+    {
+      "id": "v-a1-u3-04",
+      "german": "das Mineralwasser",
+      "article": "das",
+      "plural": "die Mineralwässer",
+      "english": "the mineral water / sparkling water",
+      "partOfSpeech": "noun",
+      "ipa": "/mɪnəˈʁaːlˌvasɐ/",
+      "exampleDe": "Möchten Sie Mineralwasser mit oder ohne Kohlensäure?",
+      "exampleEn": "Would you like mineral water with or without carbonation?",
+      "grammarNote": "Compound noun: das Mineral + das Wasser = das Mineralwasser."
+    },
+    {
+      "id": "v-a1-u3-05",
+      "german": "der Saft",
+      "article": "der",
+      "plural": "die Säfte",
+      "english": "the juice",
+      "partOfSpeech": "noun",
+      "ipa": "/zaft/",
+      "exampleDe": "Ich nehme einen Orangensaft.",
+      "exampleEn": "I will take an orange juice.",
+      "grammarNote": "Masculine noun ('der'). Notice vowel umlaut change in plural: 'die Säfte'."
+    },
+    {
+      "id": "v-a1-u3-06",
+      "german": "die Milch",
+      "article": "die",
+      "plural": null,
+      "english": "the milk",
+      "partOfSpeech": "noun",
+      "ipa": "/mɪlç/",
+      "exampleDe": "Trinken Sie den Kaffee mit Milch und Zucker?",
+      "exampleEn": "Do you drink coffee with milk and sugar?",
+      "grammarNote": "Feminine noun ('die'). Seldom used in the plural."
+    },
+    {
+      "id": "v-a1-u3-07",
+      "german": "der Zucker",
+      "article": "der",
+      "plural": null,
+      "english": "the sugar",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈtsʊkɐ/",
+      "exampleDe": "Ich trinke meinen Tee ohne Zucker.",
+      "exampleEn": "I drink my tea without sugar.",
+      "grammarNote": "Masculine mass noun ('der'). After the accusative preposition 'ohne' (without): 'ohne Zucker'."
+    },
+    {
+      "id": "v-a1-u3-08",
+      "german": "das Croissant",
+      "article": "das",
+      "plural": "die Croissants",
+      "english": "the croissant",
+      "partOfSpeech": "noun",
+      "ipa": "/kʁo̯aˈsɑ̃ː/",
+      "exampleDe": "Haben Sie noch ein frisches Croissant?",
+      "exampleEn": "Do you still have a fresh croissant?",
+      "grammarNote": "Loan word from French. In Standard German it takes neuter article 'das'."
+    },
+    {
+      "id": "v-a1-u3-09",
+      "german": "das Brötchen",
+      "article": "das",
+      "plural": "die Brötchen",
+      "english": "the bread roll",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈbʁøːtçən/",
+      "exampleDe": "Zwei Brötchen mit Butter und Marmelade, bitte.",
+      "exampleEn": "Two bread rolls with butter and jam, please.",
+      "grammarNote": "All German nouns ending with diminutive '-chen' are strictly neuter ('das'). Singular and plural forms are identical."
+    },
+    {
+      "id": "v-a1-u3-10",
+      "german": "das Brot",
+      "article": "das",
+      "plural": "die Brote",
+      "english": "the bread",
+      "partOfSpeech": "noun",
+      "ipa": "/bʁoːt/",
+      "exampleDe": "Das deutsche Brot schmeckt weltklasse.",
+      "exampleEn": "The German bread tastes world-class.",
+      "grammarNote": "Neuter noun ('das'). Plural adds '-e': 'die Brote'."
+    },
+    {
+      "id": "v-a1-u3-11",
+      "german": "der Kuchen",
+      "article": "der",
+      "plural": "die Kuchen",
+      "english": "the cake",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈkuːxn̩/",
+      "exampleDe": "Ein Stück Kuchen, bitte.",
+      "exampleEn": "A piece of cake, please.",
+      "grammarNote": "Masculine noun ('der'). Singular and plural forms are identical."
+    },
+    {
+      "id": "v-a1-u3-12",
+      "german": "die Torte",
+      "article": "die",
+      "plural": "die Torten",
+      "english": "the layer cake / gateau / tart",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈtɔʁtə/",
+      "exampleDe": "Die Schwarzwälder Kirschtorte ist köstlich.",
+      "exampleEn": "The Black Forest cherry gateau is delicious.",
+      "grammarNote": "Feminine noun ('die'). Refers specifically to decorated, layered cream/fruit cakes."
+    },
+    {
+      "id": "v-a1-u3-13",
+      "german": "der Apfelstrudel",
+      "article": "der",
+      "plural": "die Apfelstrudel",
+      "english": "the apple strudel",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈapfl̩ˌʃtʁuːdl̩/",
+      "exampleDe": "Für mich bitte einen warmen Apfelstrudel mit Vanilleeis.",
+      "exampleEn": "For me, please, a warm apple strudel with vanilla ice cream.",
+      "grammarNote": "Masculine compound noun ('der Apfel' + 'der Strudel'). Plural form is identical."
+    },
+    {
+      "id": "v-a1-u3-14",
+      "german": "die Speisekarte",
+      "article": "die",
+      "plural": "die Speisekarten",
+      "english": "the menu",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈʃpaɪ̯zəˌkaʁtə/",
+      "exampleDe": "Können wir bitte die Speisekarte haben?",
+      "exampleEn": "Could we please have the menu?",
+      "grammarNote": "Feminine compound noun ('die Speise' = food + 'die Karte' = card/menu)."
+    },
+    {
+      "id": "v-a1-u3-15",
+      "german": "die Rechnung",
+      "article": "die",
+      "plural": "die Rechnungen",
+      "english": "the bill / check",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈʁɛçnʊŋ/",
+      "exampleDe": "Die Rechnung, bitte!",
+      "exampleEn": "The bill, please!",
+      "grammarNote": "All German nouns ending in '-ung' are 100% feminine ('die')."
+    },
+    {
+      "id": "v-a1-u3-16",
+      "german": "der Kellner",
+      "article": "der",
+      "plural": "die Kellner",
+      "english": "the waiter (male)",
+      "partOfSpeech": "noun",
+      "ipa": "/ˈkɛlnɐ/",
+      "exampleDe": "Der Kellner bringt die Getränke.",
+      "exampleEn": "The waiter brings the drinks.",
+      "grammarNote": "Feminine form is 'die Kellnerin' (pl. 'die Kellnerinnen')."
+    },
+    {
+      "id": "v-a1-u3-17",
+      "german": "möchten",
+      "article": null,
+      "plural": null,
+      "english": "would like (polite)",
+      "partOfSpeech": "verb",
+      "ipa": "/ˈmœçtn̩/",
+      "exampleDe": "Ich möchte einen Cappuccino, bitte.",
+      "exampleEn": "I would like a cappuccino, please.",
+      "grammarNote": "Technically Konjunktiv II of 'mögen', but treated as an essential modal verb in A1. First and third person singular are identical: ich möchte, er/sie/es möchte."
+    },
+    {
+      "id": "v-a1-u3-18",
+      "german": "bestellen",
+      "article": null,
+      "plural": null,
+      "english": "to order",
+      "partOfSpeech": "verb",
+      "ipa": "/bəˈʃtɛlən/",
+      "exampleDe": "Wir möchten gerne bestellen.",
+      "exampleEn": "We would like to order.",
+      "grammarNote": "Regular weak verb with inseparable prefix 'be-': ich bestelle, du bestellst, er bestellt."
+    },
+    {
+      "id": "v-a1-u3-19",
+      "german": "bezahlen",
+      "article": null,
+      "plural": null,
+      "english": "to pay",
+      "partOfSpeech": "verb",
+      "ipa": "/bəˈtsaːlən/",
+      "exampleDe": "Wir möchten bitte bezahlen.",
+      "exampleEn": "We would like to pay, please.",
+      "grammarNote": "Often shortened colloquially to 'zahlen' ('Zahlen, bitte!')."
+    },
+    {
+      "id": "v-a1-u3-20",
+      "german": "zusammen / getrennt",
+      "article": null,
+      "plural": null,
+      "english": "together / separately",
+      "partOfSpeech": "adverb",
+      "ipa": "/tsuˈzamən / ɡəˈtʁɛnt/",
+      "exampleDe": "Zahlen Sie zusammen oder getrennt?",
+      "exampleEn": "Are you paying together or separately?",
+      "grammarNote": "Standard question every waiter in the DACH region asks when bringing the bill."
+    }
+  ],
+
+  "grammar": {
+    "title": "Polite Requests with 'möchten' & The Accusative Case (Direct Objects)",
+    "explanation": "When ordering food and drinks in Germany, Austria, or Switzerland, two foundational grammatical tools are required: (1) using the polite verb form 'möchten' ('would like') instead of blunt commands, and (2) applying the Accusative Case (Akkusativ) to masculine direct objects. In German, the direct object is the noun directly receiving the action of having, wanting, taking, drinking, or eating.",
+    "ruleHighlight": "The Golden Rule of A1 Accusative: Only MASCULINE articles change in the accusative case! 'der' becomes 'den', and 'ein' becomes 'einen'. Feminine ('die / eine'), neuter ('das / ein'), and plural ('die / keine') remain 100% identical to the nominative case.",
+    "tables": [
+      {
+        "caption": "Definite Articles: Nominative (Subject) vs. Accusative (Direct Object)",
+        "headers": ["Gender", "Nominative (Subject)", "Accusative (Direct Object)", "Example with 'möchten'"],
+        "rows": [
+          ["Masculine (m)", "der Kaffee", "den Kaffee", "Ich nehme den Kaffee."],
+          ["Feminine (f)", "die Rechnung", "die Rechnung", "Ich möchte die Rechnung."],
+          ["Neuter (n)", "das Wasser", "das Wasser", "Ich trinke das Wasser."],
+          ["Plural (pl)", "die Brötchen", "die Brötchen", "Ich esse die Brötchen."]
+        ],
+        "colorCodes": {
+          "der": "#3b82f6",
+          "den": "#1d4ed8",
+          "die": "#ec4899",
+          "das": "#10b981"
+        }
+      },
+      {
+        "caption": "Indefinite Articles: Nominative vs. Accusative",
+        "headers": ["Gender", "Nominative", "Accusative", "Example Sentence"],
+        "rows": [
+          ["Masculine (m)", "ein Kaffee / Tee", "einen Kaffee / Tee", "Ich möchte einen Tee, bitte."],
+          ["Feminine (f)", "eine Torte", "eine Torte", "Ich nehme eine Torte."],
+          ["Neuter (n)", "ein Brötchen", "ein Brötchen", "Wir möchten ein Brötchen."],
+          ["Plural (pl)", "keine Brötchen", "keine Brötchen", "Wir haben keine Brötchen."]
+        ]
+      },
+      {
+        "caption": "Conjugation of 'möchten' (Present / Polite Request)",
+        "headers": ["Pronoun", "Form", "English Equivalent"],
+        "rows": [
+          ["ich", "möchte", "I would like"],
+          ["du", "möchtest", "you would like (informal)"],
+          ["er / sie / es", "möchte", "he / she / it would like"],
+          ["wir", "möchten", "we would like"],
+          ["ihr", "möchtet", "you all would like"],
+          ["sie / Sie", "möchten", "they / you (formal) would like"]
+        ]
+      }
+    ],
+
+    "commonMistakes": [
+      {
+        "mistakeNumber": 1,
+        "title": "Using 'Ich will...' instead of 'Ich möchte...'",
+        "incorrect": "Ich will einen Kaffee.",
+        "correct": "Ich möchte bitte einen Kaffee. / Ich hätte gerne einen Kaffee.",
+        "explanation": "In English, 'I want a coffee' can sound casually acceptable, but in German, 'Ich will' sounds demanding and childish (like a toddler throwing a tantrum). German servers expect polite forms: 'Ich möchte bitte...' ('I would like please...') or 'Ich hätte gerne...' ('I would gladly have...')."
+      },
+      {
+        "mistakeNumber": 2,
+        "title": "Forgetting the masculine accusative ending: 'ein' instead of 'einen'",
+        "incorrect": "Ich möchte ein Kaffee und ein Apfelstrudel.",
+        "correct": "Ich möchte einen Kaffee und einen Apfelstrudel.",
+        "explanation": "'Kaffee' and 'Apfelstrudel' are both masculine nouns ('der Kaffee', 'der Apfelstrudel'). Because they are the direct objects of the verb 'möchten', the indefinite article MUST take the accusative masculine ending '-en': 'einen Kaffee', 'einen Apfelstrudel'."
+      },
+      {
+        "mistakeNumber": 3,
+        "title": "Literal translation: 'Kann ich die Rechnung haben?'",
+        "incorrect": "Kann ich die Rechnung haben?",
+        "correct": "Zahlen, bitte! / Die Rechnung, bitte! / Wir möchten bitte bezahlen.",
+        "explanation": "Translating the English phrase 'Can I have the bill?' word-for-word sounds unnatural and clunky in German. Native speakers simply say 'Zahlen, bitte!' ('Paying, please!') or 'Die Rechnung, bitte!'. The waiter will immediately ask: 'Zusammen oder getrennt?' ('Together or separate?')."
+      }
+    ],
+
+    "examples": [
+      {
+        "de": "Guten Tag, ich möchte bitte einen schwarzen Kaffee und ein Croissant.",
+        "en": "Hello, I would like a black coffee and a croissant, please.",
+        "breakdown": "Masculine 'Kaffee' becomes accusative 'einen schwarzen Kaffee'; neuter 'Croissant' remains 'ein Croissant'."
+      },
+      {
+        "de": "Was möchten Sie trinken, Frau Meier?",
+        "en": "What would you like to drink, Ms. Meier?",
+        "breakdown": "Formal 'Sie' with verb 'möchten' in second position: Question word 'Was' + verb 'möchten' + subject 'Sie' + infinitive 'trinken' at the end."
+      },
+      {
+        "de": "Wir möchten bitte bezahlen. - Zusammen oder getrennt?",
+        "en": "We would like to pay, please. - Together or separately?",
+        "breakdown": "'Möchten' conjugates for 'wir' with the infinitive 'bezahlen' at the sentence bracket end."
+      }
+    ]
+  },
+
+  "dialogue": {
+    "title": "Im Café am Viktualienmarkt (München)",
+    "context": "Herr Müller meets his friend Sarah at a cozy café in Munich. The waiter (Kellner) approaches their table to take their order and settle the bill.",
+    "lines": [
+      {
+        "speaker": "Kellner",
+        "avatar": "K",
+        "avatarBg": "from-slate-700 to-slate-900",
+        "german": "Guten Tag! Haben Sie schon gewählt? Was darf ich Ihnen bringen?",
+        "english": "Good day! Have you made your choice? What may I bring you?"
+      },
+      {
+        "speaker": "Herr Müller",
+        "avatar": "HM",
+        "avatarBg": "from-blue-600 to-indigo-600",
+        "german": "Guten Tag! Ich möchte bitte einen Cappuccino und ein Stück Apfelstrudel.",
+        "english": "Good day! I would like a cappuccino and a piece of apple strudel, please."
+      },
+      {
+        "speaker": "Kellner",
+        "avatar": "K",
+        "avatarBg": "from-slate-700 to-slate-900",
+        "german": "Sehr gerne. Und für Sie?",
+        "english": "With pleasure. And for you?"
+      },
+      {
+        "speaker": "Sarah",
+        "avatar": "S",
+        "avatarBg": "from-pink-600 to-rose-600",
+        "german": "Für mich bitte einen Pfefferminztee und ein Glas Mineralwasser ohne Kohlensäure.",
+        "english": "For me, please, a peppermint tea and a glass of still mineral water."
+      },
+      {
+        "speaker": "Kellner",
+        "avatar": "K",
+        "avatarBg": "from-slate-700 to-slate-900",
+        "german": "Gerne, kommt sofort! ... [Später] ... Hat es Ihnen geschmeckt?",
+        "english": "Gladly, coming right up! ... [Later] ... Did you enjoy everything?"
+      },
+      {
+        "speaker": "Sarah",
+        "avatar": "S",
+        "avatarBg": "from-pink-600 to-rose-600",
+        "german": "Ja, vielen Dank, es war sehr lecker! Wir möchten bitte zahlen.",
+        "english": "Yes, thank you very much, it was delicious! We would like to pay, please."
+      },
+      {
+        "speaker": "Kellner",
+        "avatar": "K",
+        "avatarBg": "from-slate-700 to-slate-900",
+        "german": "Zusammen oder getrennt?",
+        "english": "Together or separately?"
+      },
+      {
+        "speaker": "Herr Müller",
+        "avatar": "HM",
+        "avatarBg": "from-blue-600 to-indigo-600",
+        "german": "Getrennt, bitte. Was macht der Cappuccino und der Strudel?",
+        "english": "Separately, please. How much is the cappuccino and the strudel?"
+      },
+      {
+        "speaker": "Kellner",
+        "avatar": "K",
+        "avatarBg": "from-slate-700 to-slate-900",
+        "german": "Das macht zusammen 8 Euro 40.",
+        "english": "That comes to 8 euros 40 in total."
+      },
+      {
+        "speaker": "Herr Müller",
+        "avatar": "HM",
+        "avatarBg": "from-blue-600 to-indigo-600",
+        "german": "Hier sind 10 Euro. Stimmt so, vielen Dank!",
+        "english": "Here is 10 euros. Keep the change, thank you very much!"
+      },
+      {
+        "speaker": "Kellner",
+        "avatar": "K",
+        "avatarBg": "from-slate-700 to-slate-900",
+        "german": "Vielen herzlichen Dank! Einen schönen Tag noch. Auf Wiedersehen!",
+        "english": "Thank you very much indeed! Have a nice day. Goodbye!"
+      }
+    ]
+  },
+
+  "culture": {
+    "title": "Café Culture in the DACH Region: 'Zusammen oder getrennt?' & Tipping Etiquette",
+    "location": "Germany, Austria & Switzerland (DACH)",
+    "flag": "🇩🇪 🇦🇹 🇨🇭",
+    "content": "Café culture is an institution across the German-speaking world. In Vienna, historic coffee houses ('Kaffeehäuser') invite guests to read newspapers and linger for hours over a single 'Melange' served with a glass of water on a silver tray. In Germany, the afternoon ritual of 'Kaffee und Kuchen' (coffee and cake around 3:30–4:00 PM on weekends) is a beloved social tradition with friends and family. When settling the bill in restaurants and cafés, the server brings the mobile leather wallet or card terminal directly to your table and will invariably ask: 'Zusammen oder getrennt?' ('Together or separate?'). Itemized split billing is completely normal, even in large groups.",
+    "proTip": "Tipping (Trinkgeld) in Germany is not calculated at 20% like in North America, but rounding up by 5% to 10% is standard courtesy. Instead of leaving coins on the table when you leave, tell the server your rounded total as you hand over the cash or card: if the bill is €8.40, hand them a €10 note and say 'Neun Euro, bitte' (to tip 60 cents), or 'Stimmt so!' ('Keep the change!') to tip the full remainder."
+  },
+
+  "exercises": [
+    {
+      "id": "a1-u3-ex-001",
+      "type": "multiple_choice",
+      "level": "a1",
+      "skillTag": "vocabulary",
+      "prompt": "Choose the most polite and natural German way to order a cup of tea at a café.",
+      "promptDe": "Situation: Du möchtest einen Tee im Café bestellen.",
+      "explanation": "'Ich möchte bitte einen Tee' uses the polite modal form 'möchten' plus accusative masculine 'einen Tee'. 'Ich will' is impolite, and 'Gib mir' is a rude command.",
+      "grammarTip": "Always use 'möchten bitte' when placing orders in Germany, Austria, and Switzerland.",
+      "xpReward": 10,
+      "difficulty": "beginner",
+      "options": [
+        { "id": "opt-1", "text": "Ich möchte bitte einen Tee.", "translation": "I would like a tea, please.", "isCorrect": true },
+        { "id": "opt-2", "text": "Ich will Tee jetzt.", "translation": "I want tea now.", "isCorrect": false },
+        { "id": "opt-3", "text": "Gib mir einen Tee!", "translation": "Give me a tea!", "isCorrect": false },
+        { "id": "opt-4", "text": "Habe ich einen Tee?", "translation": "Do I have a tea?", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "a1-u3-ex-002",
+      "type": "article_selection",
+      "level": "a1",
+      "skillTag": "grammar",
+      "prompt": "Select the correct definite article for 'Kaffee' in this accusative direct object sentence.",
+      "promptDe": "Herr Weber nimmt ___ Kaffee mit Milch und Zucker.",
+      "noun": "Kaffee",
+      "plural": "die Kaffees",
+      "translationEn": "the coffee",
+      "correctArticle": "den",
+      "caseType": "accusative",
+      "ruleExplanation": "'Kaffee' is masculine ('der Kaffee'). As the direct object of the verb 'nehmen' (to take), masculine 'der' changes to 'den'.",
+      "explanation": "In the accusative case, only masculine articles change: 'der Kaffee' -> 'den Kaffee'.",
+      "grammarTip": "Nominative: der Kaffee -> Accusative: den Kaffee / einen Kaffee.",
+      "xpReward": 10,
+      "difficulty": "beginner"
+    },
+    {
+      "id": "a1-u3-ex-003",
+      "type": "article_selection",
+      "level": "a1",
+      "skillTag": "grammar",
+      "prompt": "Select the correct definite article for 'Wasser' in the accusative case.",
+      "promptDe": "Die Dame trinkt ___ kalte Mineralwasser.",
+      "noun": "Mineralwasser",
+      "plural": "die Mineralwässer",
+      "translationEn": "the mineral water",
+      "correctArticle": "das",
+      "caseType": "accusative",
+      "ruleExplanation": "'Wasser' and 'Mineralwasser' are neuter ('das Wasser'). Neuter articles do NOT change in the accusative case ('das' remains 'das').",
+      "explanation": "Neuter nouns keep identical articles in both Nominative and Accusative: das Wasser -> das Wasser.",
+      "grammarTip": "Only masculine nouns change their article in the accusative case.",
+      "xpReward": 10,
+      "difficulty": "beginner"
+    },
+    {
+      "id": "a1-u3-ex-004",
+      "type": "fill_in_the_blank",
+      "level": "a1",
+      "skillTag": "grammar",
+      "prompt": "Complete the sentence with the correct form of the polite verb 'möchten'.",
+      "promptDe": "Was ___ Sie trinken, Herr Schmidt?",
+      "sentenceWithBlank": "Was ___ Sie trinken, Herr Schmidt?",
+      "correctAnswer": "möchten",
+      "wordBank": ["möchte", "möchtest", "möchtet", "möchten"],
+      "hint": "The subject is the formal pronoun 'Sie', which takes the plural/formal ending '-en'.",
+      "explanation": "For the formal address pronoun 'Sie', the verb is 'möchten' ('Was möchten Sie trinken?').",
+      "grammarTip": "Conjugation of möchten: ich möchte, du möchtest, er/sie möchte, wir möchten, ihr möchtet, Sie möchten.",
+      "xpReward": 15,
+      "difficulty": "beginner"
+    },
+    {
+      "id": "a1-u3-ex-005",
+      "type": "matching_pairs",
+      "level": "a1",
+      "skillTag": "vocabulary",
+      "prompt": "Match the German café vocabulary items with their English translations.",
+      "promptDe": "Verbinde die deutschen Wörter mit den passenden englischen Übersetzungen.",
+      "explanation": "These four terms are essential for ordering and dining at any bakery or café.",
+      "grammarTip": "Notice that 'Rechnung' and 'Speisekarte' are feminine ('die'), while 'Kuchen' is masculine ('der').",
+      "xpReward": 20,
+      "difficulty": "beginner",
+      "pairs": [
+        { "id": "p-1", "german": "die Speisekarte", "english": "the menu" },
+        { "id": "p-2", "german": "die Rechnung", "english": "the bill / check" },
+        { "id": "p-3", "german": "das Brötchen", "english": "the bread roll" },
+        { "id": "p-4", "german": "der Kuchen", "english": "the cake" }
+      ]
+    },
+    {
+      "id": "a1-u3-ex-006",
+      "type": "sentence_reordering",
+      "level": "a1",
+      "skillTag": "grammar",
+      "prompt": "Reorder the words to build a grammatically correct German café order.",
+      "promptDe": "Bringe die Wörter in die richtige Reihenfolge.",
+      "translationEn": "I would like an apple strudel, please.",
+      "scrambledTokens": ["bitte", "einen", "möchte", "Ich", "Apfelstrudel"],
+      "correctSentence": "Ich möchte bitte einen Apfelstrudel",
+      "explanation": "Subject 'Ich' (Position 1) + conjugated modal verb 'möchte' (Position 2) + polite particle 'bitte' + accusative direct object 'einen Apfelstrudel'.",
+      "grammarTip": "In declarative sentences, the conjugated verb is always in Position 2.",
+      "xpReward": 20,
+      "difficulty": "intermediate"
+    },
+    {
+      "id": "a1-u3-ex-007",
+      "type": "fill_in_the_blank",
+      "level": "a1",
+      "skillTag": "grammar",
+      "prompt": "Fill in the correct accusative indefinite article for 'Apfelsaft' (masculine: der Apfelsaft).",
+      "promptDe": "Ich trinke gerne ___ Apfelsaft.",
+      "sentenceWithBlank": "Ich trinke gerne ___ Apfelsaft.",
+      "correctAnswer": "einen",
+      "wordBank": ["ein", "eine", "einen", "einem"],
+      "hint": "'Apfelsaft' is masculine and functions as the direct object of 'trinken'.",
+      "explanation": "Because 'Apfelsaft' is masculine ('der Apfelsaft') and is the direct object of the verb 'trinken', it takes the accusative form 'einen'.",
+      "grammarTip": "Masculine accusative indefinite article is 'einen'.",
+      "xpReward": 15,
+      "difficulty": "beginner"
+    },
+    {
+      "id": "a1-u3-ex-008",
+      "type": "multiple_choice",
+      "level": "a1",
+      "skillTag": "vocabulary",
+      "prompt": "When the waiter asks: 'Zusammen oder getrennt?', what are they asking?",
+      "promptDe": "Der Kellner fragt am Tisch: 'Zusammen oder getrennt?'",
+      "explanation": "'Zusammen' means together (one total bill), and 'getrennt' means separately (each person pays for their own items).",
+      "grammarTip": "Itemized bill splitting is common and welcomed in German-speaking gastronomy.",
+      "xpReward": 10,
+      "difficulty": "beginner",
+      "options": [
+        { "id": "opt-1", "text": "Are you paying together on one bill, or separately?", "translation": "Zahlen Sie auf eine Rechnung oder getrennt?", "isCorrect": true },
+        { "id": "opt-2", "text": "Would you like to sit inside or outside?", "translation": "Möchten Sie drinnen oder draußen sitzen?", "isCorrect": false },
+        { "id": "opt-3", "text": "Do you want milk and sugar in your coffee?", "translation": "Möchten Sie Milch und Zucker?", "isCorrect": false },
+        { "id": "opt-4", "text": "Are you eating here or taking it to go?", "translation": "Essen Sie hier oder zum Mitnehmen?", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "a1-u3-ex-009",
+      "type": "translation",
+      "level": "a1",
+      "skillTag": "writing",
+      "prompt": "Translate this sentence into German: 'A mineral water, please.'",
+      "promptDe": "Übersetze ins Deutsche: 'A mineral water, please.'",
+      "direction": "en_to_de",
+      "sourceSentence": "A mineral water, please.",
+      "acceptedTranslations": [
+        "Ein Mineralwasser, bitte.",
+        "Ein Mineralwasser, bitte",
+        "Ein Mineralwasser bitte",
+        "ein mineralwasser, bitte"
+      ],
+      "explanation": "'Mineralwasser' is neuter ('das Mineralwasser'), so the indefinite article is 'ein'. Remember to capitalize German nouns ('Mineralwasser').",
+      "grammarTip": "Neuter nominative & accusative indefinite article: ein.",
+      "xpReward": 15,
+      "difficulty": "beginner"
+    },
+    {
+      "id": "a1-u3-ex-010",
+      "type": "sentence_reordering",
+      "level": "a1",
+      "skillTag": "grammar",
+      "prompt": "Reorder the words to form the standard question a waiter asks to take beverage orders.",
+      "promptDe": "Bringe die Wörter in die richtige Reihenfolge.",
+      "translationEn": "What would you like to drink?",
+      "scrambledTokens": ["trinken", "Sie", "Was", "möchten"],
+      "correctSentence": "Was möchten Sie trinken",
+      "explanation": "Question word 'Was' (Pos 1) + conjugated modal verb 'möchten' (Pos 2) + subject 'Sie' (Pos 3) + infinitive verb 'trinken' at the end of the clause.",
+      "grammarTip": "In German modal sentences, the second verb appears in the infinitive at the end of the sentence (Satzklammer).",
+      "xpReward": 20,
+      "difficulty": "intermediate"
+    },
+    {
+      "id": "a1-u3-ex-011",
+      "type": "listening",
+      "level": "a1",
+      "skillTag": "listening",
+      "prompt": "Listen to the guest ordering at the counter and identify what they order.",
+      "audioText": "Guten Morgen! Ich hätte gerne zwei Brötchen und einen schwarzen Kaffee zum Mitnehmen, bitte.",
+      "promptDe": "Höre die Bestellung an und wähle die richtige Antwort.",
+      "explanation": "The speaker clearly states: 'zwei Brötchen und einen schwarzen Kaffee zum Mitnehmen' (two bread rolls and a black coffee to take away).",
+      "grammarTip": "'Zum Mitnehmen' means 'to go / take away'; 'Hier essen' means 'for here'.",
+      "xpReward": 15,
+      "difficulty": "intermediate",
+      "options": [
+        { "id": "opt-1", "text": "Two bread rolls and a black coffee to go", "translation": "Zwei Brötchen und ein schwarzer Kaffee zum Mitnehmen", "isCorrect": true },
+        { "id": "opt-2", "text": "One croissant and a cappuccino for here", "translation": "Ein Croissant und ein Cappuccino für hier", "isCorrect": false },
+        { "id": "opt-3", "text": "Two pieces of apple cake and mineral water", "translation": "Zwei Stück Apfelkuchen und Mineralwasser", "isCorrect": false },
+        { "id": "opt-4", "text": "One tea with lemon and a slice of bread", "translation": "Ein Tee mit Zitrone und eine Scheibe Brot", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "a1-u3-ex-012",
+      "type": "matching_pairs",
+      "level": "a1",
+      "skillTag": "grammar",
+      "prompt": "Match each food/drink item with its correct grammatical gender article (der, die, or das).",
+      "promptDe": "Verbinde das Wort mit dem richtigen Artikel.",
+      "explanation": "der Kuchen (m), die Torte (f), das Croissant (n), der Zucker (m).",
+      "grammarTip": "Always learn German nouns with their definite article and plural form.",
+      "xpReward": 20,
+      "difficulty": "intermediate",
+      "pairs": [
+        { "id": "g-1", "german": "Kuchen", "english": "der (masculine)" },
+        { "id": "g-2", "german": "Torte", "english": "die (feminine)" },
+        { "id": "g-3", "german": "Croissant", "english": "das (neuter)" },
+        { "id": "g-4", "german": "Milch", "english": "die (feminine)" }
+      ]
+    },
+    {
+      "id": "a1-u3-ex-013",
+      "type": "speaking",
+      "level": "a1",
+      "skillTag": "speaking",
+      "prompt": "Read the polite order aloud clearly in German using your microphone.",
+      "promptDe": "Sprich den Satz laut auf Deutsch aus:",
+      "targetSentence": "Ich möchte bitte einen Kaffee mit Milch.",
+      "phoneticGuide": "Ikh MERKH-teh BIT-teh EYE-nen KAH-fay mit MILKH.",
+      "explanation": "Focus on the soft 'ch' sound in 'Ich' and 'möchte', and the accusative masculine ending in 'einen'.",
+      "grammarTip": "Pronounce 'ö' in möchte by rounding your lips as if to say 'o', but producing an 'e' sound.",
+      "xpReward": 20,
+      "difficulty": "intermediate"
+    },
+    {
+      "id": "a1-u3-ex-014",
+      "type": "multiple_choice",
+      "level": "a1",
+      "skillTag": "vocabulary",
+      "prompt": "Your bill is €4.50. You give the server a €5 note and want them to keep the 50 cents as a tip. What do you say?",
+      "promptDe": "Die Rechnung ist 4,50 Euro. Du gibst einen 5-Euro-Schein.",
+      "explanation": "'Stimmt so!' is the universal idiomatic phrase in Germany and Austria meaning 'Keep the change!'",
+      "grammarTip": "'Stimmt so' literally translates to 'It is correct like this'.",
+      "xpReward": 10,
+      "difficulty": "beginner",
+      "options": [
+        { "id": "opt-1", "text": "Stimmt so, danke!", "translation": "Keep the change, thanks!", "isCorrect": true },
+        { "id": "opt-2", "text": "Nehmen Sie mein Geld!", "translation": "Take my money!", "isCorrect": false },
+        { "id": "opt-3", "text": "Auf Wiedersehen, kein Wechselgeld!", "translation": "Goodbye, no change!", "isCorrect": false },
+        { "id": "opt-4", "text": "Ich will nichts zurück.", "translation": "I want nothing back.", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "a1-u3-ex-015",
+      "type": "writing_task",
+      "level": "a1",
+      "skillTag": "writing",
+      "prompt": "Write a short 2-sentence note ordering a drink and a snack at a German café (e.g., mention one drink and one food item with 'möchte' and 'bitte').",
+      "promptDe": "Schreibe zwei kurze Sätze: Bestelle ein Getränk und ein Essen im Café.",
+      "sampleResponse": "Guten Tag! Ich möchte bitte einen Kaffee mit Milch und ein Stück Kuchen.",
+      "rubric": {
+        "minWords": 8,
+        "requiredElements": [
+          "Polite greeting (Guten Tag / Hallo)",
+          "Form of möchten (Ich möchte...)",
+          "One drink and one food item with correct article",
+          "Polite particle 'bitte'"
+        ]
+      },
+      "explanation": "A complete A1 café order uses 'Guten Tag', 'Ich möchte bitte...', correct accusative articles, and gratitude.",
+      "grammarTip": "Remember capital letters for all German nouns (Kaffee, Milch, Kuchen).",
+      "xpReward": 25,
+      "difficulty": "intermediate"
+    }
+  ],
+
+  "unitQuiz": {
+    "id": "quiz-a1-u3",
+    "unitId": "a1-u3-food-cafe",
+    "levelCode": "A1",
+    "title": "Unit 3 Mastery Quiz: Food & Ordering at a Café",
+    "titleDe": "Abschlusstest Einheit 3: Essen & Bestellen im Café",
+    "description": "10 comprehensive questions assessing your mastery of café vocabulary, polite ordering formulas with 'möchten', and the accusative case. Pass mark: 70%.",
+    "passMarkPercentage": 70,
+    "questions": [
+      {
+        "id": "q-u3-01",
+        "level": "A1",
+        "section": "grammar",
+        "topic": "Polite Verb Forms",
+        "prompt": "Welche Form von 'möchten' ist grammatikalisch korrekt? 'Ich ___ bitte einen Orangensaft.'",
+        "options": ["möchte", "möchtest", "möchten", "möchtet"],
+        "correctAnswer": 0,
+        "explanation": "The first person singular pronoun 'ich' takes 'möchte' ('Ich möchte'). Notice that 'ich' and 'er/sie/es' share the identical form.",
+        "points": 1
+      },
+      {
+        "id": "q-u3-02",
+        "level": "A1",
+        "section": "grammar",
+        "topic": "Accusative Masculine Article",
+        "prompt": "Ergänze den unbestimmten Artikel im Akkusativ: 'Lukas bestellt ___ warmen Tee.' (der Tee)",
+        "options": ["einen", "ein", "eine", "einem"],
+        "correctAnswer": 0,
+        "explanation": "'Tee' is a masculine noun ('der Tee'). As the direct object of the verb 'bestellen', it takes the accusative masculine indefinite article 'einen'.",
+        "points": 1
+      },
+      {
+        "id": "q-u3-03",
+        "level": "A1",
+        "section": "grammar",
+        "topic": "Accusative Neuter Article",
+        "prompt": "Welcher Artikel passt? 'Wir möchten ___ frisches Croissant zum Frühstück.' (das Croissant)",
+        "options": ["ein", "einen", "eine", "eines"],
+        "correctAnswer": 0,
+        "explanation": "'Croissant' is neuter ('das Croissant'). In the accusative case, neuter indefinite articles remain 'ein'. Only masculine articles change to 'einen'.",
+        "points": 1
+      },
+      {
+        "id": "q-u3-04",
+        "level": "A1",
+        "section": "vocabulary",
+        "topic": "Café Billing Expressions",
+        "prompt": "Wie fragt man im Café höflich nach der Rechnung?",
+        "options": [
+          "Die Rechnung, bitte!",
+          "Geben Sie mir Rechnung!",
+          "Ich nehme Geld!",
+          "Konto machen, bitte!"
+        ],
+        "correctAnswer": 0,
+        "explanation": "'Die Rechnung, bitte!' or 'Zahlen, bitte!' is the standard polite expression when requesting the bill.",
+        "points": 1
+      },
+      {
+        "id": "q-u3-05",
+        "level": "A1",
+        "section": "vocabulary",
+        "topic": "Plural Forms of Nouns",
+        "prompt": "Was ist die richtige Pluralform? 'Ich kaufe beim Bäcker vier ___.' (das Brötchen)",
+        "options": ["Brötchen", "Brötchens", "Brötchenen", "Brötchere"],
+        "correctAnswer": 0,
+        "explanation": "Diminutive nouns ending in '-chen' (das Brötchen, das Mädchen) have identical singular and plural forms: ein Brötchen, vier Brötchen.",
+        "points": 1
+      },
+      {
+        "id": "q-u3-06",
+        "level": "A1",
+        "section": "grammar",
+        "topic": "Formal Questions with 'möchten'",
+        "prompt": "Ergänze die Frage des Kellners: 'Was möchten ___ trinken?'",
+        "options": ["Sie", "ihr", "du", "er"],
+        "correctAnswer": 0,
+        "explanation": "The verb ending '-en' on 'möchten' paired with formal café etiquette requires the formal address pronoun 'Sie' (capitalized).",
+        "points": 1
+      },
+      {
+        "id": "q-u3-07",
+        "level": "A1",
+        "section": "vocabulary",
+        "topic": "Beverage Options",
+        "prompt": "Was antwortet man, wenn man Mineralwasser mit Kohlensäure möchte?",
+        "options": [
+          "Mit Kohlensäure / Mit Gas, bitte.",
+          "Ohne Wasser, bitte.",
+          "Mit Saft, bitte.",
+          "Ganz trocken, bitte."
+        ],
+        "correctAnswer": 0,
+        "explanation": "In Germany, sparkling water is ordered as 'mit Kohlensäure' or simply 'mit Sprudel'. Still water is 'ohne Kohlensäure' or 'stilles Wasser'.",
+        "points": 1
+      },
+      {
+        "id": "q-u3-08",
+        "level": "A1",
+        "section": "vocabulary",
+        "topic": "Splitting the Bill",
+        "prompt": "Zwei Freunde möchten getrennt bezahlen. Was sagen sie dem Kellner?",
+        "options": [
+          "Getrennt, bitte.",
+          "Zusammen, bitte.",
+          "Alles auf mich, bitte.",
+          "Kein Problem, danke."
+        ],
+        "correctAnswer": 0,
+        "explanation": "'Getrennt, bitte' ('Separately, please') signals to the waiter that each person will pay for their own items.",
+        "points": 1
+      },
+      {
+        "id": "q-u3-09",
+        "level": "A1",
+        "section": "vocabulary",
+        "topic": "Tipping Idioms",
+        "prompt": "Der Betrag ist 7,20 Euro. Du gibst 8 Euro und sagst: '___'",
+        "options": ["Stimmt so, danke!", "Hier ist alles!", "Kein Rest!", "Ich brauche nichts!"],
+        "correctAnswer": 0,
+        "explanation": "'Stimmt so, danke!' is the universally recognized phrase across the DACH region for letting the server keep the change.",
+        "points": 1
+      },
+      {
+        "id": "q-u3-10",
+        "level": "A1",
+        "section": "grammar",
+        "topic": "Accusative Feminine Article",
+        "prompt": "Welcher Artikel gehört in die Lücke? 'Herr Wagner bestellt ___ Sachertorte.' (die Sachertorte)",
+        "options": ["eine", "einen", "ein", "einer"],
+        "correctAnswer": 0,
+        "explanation": "'Sachertorte' is a feminine noun ('die Sachertorte'). In the accusative case, feminine indefinite articles remain 'eine' ('eine Sachertorte').",
+        "points": 1
+      }
+    ]
+  },
+
+  "humanReviewFlags": [
+    {
+      "item": "die Melange / der Kaffee in Austria",
+      "flagType": "regional_variation",
+      "notes": "In Vienna and Austria, a classic coffee with steamed milk is called 'eine Melange' rather than 'ein Cappuccino'. While standard German 'Kaffee mit Milch' is universally understood, Austrian curriculum typically introduces 'die Melange'. For this core A1 unit, standard German 'der Kaffee' and 'der Cappuccino' are prioritized."
+    },
+    {
+      "item": "das Croissant vs. der Croissant",
+      "flagType": "grammatical_gender",
+      "notes": "Duden lists 'das Croissant' as primary standard neuter gender in Germany and Austria, though 'der Croissant' is occasionally heard in Southwestern Germany (Baden-Württemberg) bordering France. Standardized to neuter 'das' for A1 consistency."
+    },
+    {
+      "item": "Mineralwasser mit Sprudel vs. mit Kohlensäure",
+      "flagType": "colloquial_vs_formal",
+      "notes": "Both 'mit Sprudel' (informal/colloquial) and 'mit Kohlensäure' (formal/written menu standard) are authentic. We teach 'mit Kohlensäure' and mention 'Sprudel' in explanations for maximum real-world comprehension."
+    },
+    {
+      "item": "Konjunktiv II status of 'möchten'",
+      "flagType": "pedagogical_decision",
+      "notes": "Linguistically, 'möchte' is the Konjunktiv II form of 'mögen'. However, standard CEFR A1 pedagogy (Goethe & telc) treats 'möchten' as an independent lexical modal auxiliary to avoid overwhelming beginner students with hypothetical mood morphology."
+    }
+  ]
+}

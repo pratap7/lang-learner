@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DeutschPfad Exercise Authoring Specification",
+  "description": "JSON schema for authoring interactive German exercises across all supported pedagogic modalities.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "type", "level", "skillTag", "prompt", "explanation", "xpReward", "difficulty"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier for the exercise, e.g. 'a1-ex-001' or a UUID"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "multiple_choice",
+          "fill_in_the_blank",
+          "matching_pairs",
+          "sentence_reordering",
+          "translation",
+          "listening",
+          "speaking",
+          "article_selection",
+          "writing_task"
+        ]
+      },
+      "level": {
+        "type": "string",
+        "enum": ["a1", "a2", "b1", "b2", "c1", "c2"]
+      },
+      "skillTag": {
+        "type": "string",
+        "enum": ["reading", "writing", "listening", "speaking", "grammar", "vocabulary"]
+      },
+      "prompt": {
+        "type": "string",
+        "description": "Instruction in English guiding the learner"
+      },
+      "promptDe": {
+        "type": "string",
+        "description": "German stimulus text, dialogue snippet, or context sentence"
+      },
+      "explanation": {
+        "type": "string",
+        "description": "Clear pedagogical rule explanation displayed upon checking"
+      },
+      "grammarTip": {
+        "type": "string",
+        "description": "Optional quick pill highlighting the underlying grammar rule"
+      },
+      "xpReward": {
+        "type": "integer",
+        "minimum": 5,
+        "maximum": 50,
+        "default": 10
+      },
+      "difficulty": {
+        "type": "string",
+        "enum": ["beginner", "intermediate", "advanced"]
+      },
+
+      "options": {
+        "type": "array",
+        "description": "Used by multiple_choice and listening types",
+        "items": {
+          "type": "object",
+          "required": ["id", "text", "isCorrect"],
+          "properties": {
+            "id": { "type": "string" },
+            "text": { "type": "string" },
+            "translation": { "type": "string" },
+            "isCorrect": { "type": "boolean" }
+          }
+        }
+      },
+
+      "sentenceWithBlank": {
+        "type": "string",
+        "description": "Used by fill_in_the_blank. Use '___' or '[blank]' as token placeholder"
+      },
+      "correctAnswer": {
+        "description": "Used by fill_in_the_blank. String or array of acceptable strings",
+        "oneOf": [
+          { "type": "string" },
+          { "type": "array", "items": { "type": "string" } }
+        ]
+      },
+      "wordBank": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Optional word chips for fill_in_the_blank"
+      },
+
+      "pairs": {
+        "type": "array",
+        "description": "Used by matching_pairs. List of German-English pairs",
+        "items": {
+          "type": "object",
+          "required": ["id", "german", "english"],
+          "properties": {
+            "id": { "type": "string" },
+            "german": { "type": "string" },
+            "english": { "type": "string" }
+          }
+        }
+      },
+
+      "scrambledTokens": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Used by sentence_reordering. Shuffled words to order"
+      },
+      "correctSentence": {
+        "type": "string",
+        "description": "Used by sentence_reordering. Target ordered German sentence"
+      },
+      "translationEn": {
+        "type": "string",
+        "description": "English reference translation"
+      },
+
+      "direction": {
+        "type": "string",
+        "enum": ["en_to_de", "de_to_en"],
+        "description": "Used by translation"
+      },
+      "sourceSentence": {
+        "type": "string",
+        "description": "Used by translation"
+      },
+      "acceptedTranslations": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Used by translation. List of valid translation strings"
+      },
+
+      "audioText": {
+        "type": "string",
+        "description": "Used by listening. Utterance spoken by German speech engine"
+      },
+      "playbackRate": {
+        "type": "number",
+        "default": 1.0,
+        "description": "Used by listening"
+      },
+      "question": {
+        "type": "string",
+        "description": "Used by listening. Comprehension question"
+      },
+
+      "targetPhrase": {
+        "type": "string",
+        "description": "Used by speaking. The German phrase the learner must say"
+      },
+      "targetPhonetic": {
+        "type": "string",
+        "description": "Optional IPA pronunciation guide"
+      },
+      "minimumAccuracyPct": {
+        "type": "integer",
+        "default": 75,
+        "description": "Target speech match threshold percentage"
+      },
+
+      "noun": {
+        "type": "string",
+        "description": "Used by article_selection. The German noun (without article)"
+      },
+      "plural": {
+        "type": "string",
+        "description": "Used by article_selection. Plural form"
+      },
+      "correctArticle": {
+        "type": "string",
+        "enum": ["der", "die", "das"],
+        "description": "Used by article_selection"
+      },
+      "ruleExplanation": {
+        "type": "string",
+        "description": "Used by article_selection. Gender mnemonic rule"
+      },
+
+      "writingPrompt": {
+        "type": "string",
+        "description": "Used by writing_task. Scenario and instructions"
+      },
+      "targetWordCount": {
+        "type": "object",
+        "properties": {
+          "min": { "type": "integer" },
+          "recommended": { "type": "integer" }
+        }
+      },
+      "requiredKeywords": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "rubrics": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "sampleModelAnswer": {
+        "type": "string"
+      }
+    }
+  }
+}

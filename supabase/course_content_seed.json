@@ -1,0 +1,375 @@
+{
+  "levels": [
+    {
+      "code": "a1",
+      "order_index": 1,
+      "title": "A1 · Beginner (Breakthrough)",
+      "title_de": "A1 · Anfänger",
+      "description": "Understand and use familiar everyday expressions and very basic phrases aimed at satisfying concrete needs.",
+      "cefr_guided_hours": 80,
+      "official_exam_name": "Goethe-Zertifikat A1: Start Deutsch 1",
+      "color_hex": "#10b981",
+      "is_published": true
+    },
+    {
+      "code": "a2",
+      "order_index": 2,
+      "title": "A2 · Elementary (Waystage)",
+      "title_de": "A2 · Grundlegende Kenntnisse",
+      "description": "Communicate in simple and routine tasks requiring a simple and direct exchange of information.",
+      "cefr_guided_hours": 150,
+      "official_exam_name": "Goethe-Zertifikat A2 / telc Deutsch A2",
+      "color_hex": "#06b6d4",
+      "is_published": true
+    },
+    {
+      "code": "b1",
+      "order_index": 3,
+      "title": "B1 · Intermediate (Threshold)",
+      "title_de": "B1 · Fortgeschrittene Sprachverwendung",
+      "description": "Understand the main points of clear standard input on familiar matters. Standard requirement for German citizenship.",
+      "cefr_guided_hours": 300,
+      "official_exam_name": "Goethe-Zertifikat B1 / DTZ (Deutsch-Test für Zuwanderer)",
+      "color_hex": "#3b82f6",
+      "is_published": true
+    },
+    {
+      "code": "b2",
+      "order_index": 4,
+      "title": "B2 · Upper-Intermediate (Vantage)",
+      "title_de": "B2 · Selbständige Sprachverwendung",
+      "description": "Interact with a degree of fluency with native speakers. Required for professional workplace and university admission.",
+      "cefr_guided_hours": 450,
+      "official_exam_name": "Goethe-Zertifikat B2 / TestDaF (TDN 3/4)",
+      "color_hex": "#6366f1",
+      "is_published": true
+    },
+    {
+      "code": "c1",
+      "order_index": 5,
+      "title": "C1 · Advanced (Effective Fluency)",
+      "title_de": "C1 · Fachkundige Sprachkenntnisse",
+      "description": "Express ideas fluently and spontaneously for academic and professional purposes.",
+      "cefr_guided_hours": 650,
+      "official_exam_name": "Goethe-Zertifikat C1 / telc Deutsch C1 Hochschule",
+      "color_hex": "#8b5cf6",
+      "is_published": true
+    },
+    {
+      "code": "c2",
+      "order_index": 6,
+      "title": "C2 · Mastery (Native Precision)",
+      "title_de": "C2 · Annähernd muttersprachliche Kenntnisse",
+      "description": "Understand with ease virtually everything heard or read. Native-like precision and nuance.",
+      "cefr_guided_hours": 850,
+      "official_exam_name": "Goethe-Zertifikat C2: Großes Deutsches Sprachdiplom",
+      "color_hex": "#ec4899",
+      "is_published": true
+    }
+  ],
+  "badges": [
+    {
+      "code": "onboarding_complete",
+      "title": "Erster Schritt",
+      "title_de": "Erster Schritt",
+      "description": "Completed your personalized onboarding and study trajectory setup.",
+      "icon_name": "Award",
+      "category": "onboarding",
+      "xp_bonus": 50,
+      "requirement_type": "onboarding_steps",
+      "requirement_value": 4
+    },
+    {
+      "code": "streak_7",
+      "title": "Streak Starter",
+      "title_de": "Wochen-Serie",
+      "description": "Maintained a consistent daily study habit for 7 consecutive days.",
+      "icon_name": "Flame",
+      "category": "streak",
+      "xp_bonus": 100,
+      "requirement_type": "streak_days",
+      "requirement_value": 7
+    },
+    {
+      "code": "streak_30",
+      "title": "Habit Meister",
+      "title_de": "30-Tage Meister",
+      "description": "Achieved a 30-day continuous learning streak.",
+      "icon_name": "Flame",
+      "category": "streak",
+      "xp_bonus": 300,
+      "requirement_type": "streak_days",
+      "requirement_value": 30
+    },
+    {
+      "code": "cards_100",
+      "title": "Wortschatz 100",
+      "title_de": "100 Vokabeln",
+      "description": "Retained 100 vocabulary words using the spaced repetition system.",
+      "icon_name": "BookOpen",
+      "category": "vocabulary",
+      "xp_bonus": 150,
+      "requirement_type": "cards_reviewed",
+      "requirement_value": 100
+    },
+    {
+      "code": "perfect_grammar",
+      "title": "Grammatik Kenner",
+      "title_de": "Grammatik-Profi",
+      "description": "Scored 100% on the Akkusativ and Dativ declension mastery exercises.",
+      "icon_name": "Zap",
+      "category": "grammar",
+      "xp_bonus": 120,
+      "requirement_type": "perfect_quizzes",
+      "requirement_value": 3
+    },
+    {
+      "code": "a1_certified",
+      "title": "A1 Meister",
+      "title_de": "A1 Absolvent",
+      "description": "Completed all 6 units of A1 with an average quiz score over 80%.",
+      "icon_name": "ShieldCheck",
+      "category": "mastery",
+      "xp_bonus": 500,
+      "requirement_type": "level_completion",
+      "requirement_value": 1
+    }
+  ],
+  "units": [
+    {
+      "level_code": "a1",
+      "order_index": 1,
+      "slug": "a1-u1-erste-schritte",
+      "title": "First Steps & Introductions",
+      "title_de": "Erste Schritte & Kennenlernen",
+      "description": "Greetings, introducing yourself, polite everyday phrases, and foundational pronunciation rules.",
+      "cefr_topic": "Personal Identification & Social Courtesies",
+      "icon_name": "MessageSquare",
+      "lessons": [
+        {
+          "order_index": 1,
+          "slug": "a1-u1-l1-begruessungen",
+          "title": "Greetings & Politeness",
+          "title_de": "Begrüßungen & Höflichkeitsformen",
+          "type": "vocabulary",
+          "summary": "Master formal (Sie) vs. informal (du) greetings across Germany, Austria, and Switzerland.",
+          "xp_reward": 25,
+          "est_minutes": 12,
+          "is_free_tier": true,
+          "exercises": [
+            {
+              "order_index": 1,
+              "type": "multiple_choice",
+              "prompt": "How do you formally say 'Good morning' in German?",
+              "prompt_de": "Guten Morgen",
+              "options": ["Guten Morgen", "Gute Nacht", "Tschüss", "Auf Wiedersehen"],
+              "answer": "Guten Morgen",
+              "explanation": "'Guten Morgen' is used until roughly 11:00 AM. In formal situations, you can pair it with 'Herr' (Mr.) or 'Frau' (Ms.).",
+              "grammar_tip": "Time greetings take the accusative case masculine ending (-en): Guten Morgen, Guten Tag, Guten Abend.",
+              "skill_tag": "vocabulary",
+              "xp_points": 5
+            },
+            {
+              "order_index": 2,
+              "type": "translate",
+              "prompt": "Translate 'Nice to meet you (pleased to meet you)':",
+              "prompt_de": "Freut mich",
+              "options": ["Freut mich", "Danke schön", "Bitte sehr", "Guten Tag"],
+              "answer": "Freut mich",
+              "explanation": "'Freut mich' is a natural short form of 'Es freut mich, Sie kennenzulernen' (It pleases me to get to know you).",
+              "grammar_tip": "Reflexive verb 'freuen' with accusative pronoun 'mich'.",
+              "skill_tag": "speaking",
+              "xp_points": 5
+            },
+            {
+              "order_index": 3,
+              "type": "matching",
+              "prompt": "Match the German greeting with its English meaning:",
+              "prompt_de": "Zuordnung",
+              "options": [
+                { "de": "Auf Wiedersehen", "en": "Goodbye (formal)" },
+                { "de": "Tschüss", "en": "Bye (informal)" },
+                { "de": "Wie geht es Ihnen?", "en": "How are you? (formal)" },
+                { "de": "Bis bald", "en": "See you soon" }
+              ],
+              "answer": {
+                "Auf Wiedersehen": "Goodbye (formal)",
+                "Tschüss": "Bye (informal)",
+                "Wie geht es Ihnen?": "How are you? (formal)",
+                "Bis bald": "See you soon"
+              },
+              "explanation": "'Auf Wiedersehen' translates literally to 'until we see each other again'. On the phone, Germans say 'Auf Wiederhören'.",
+              "grammar_tip": "'Ihnen' is the capitalized dative formal pronoun for 'you'.",
+              "skill_tag": "reading",
+              "xp_points": 10
+            }
+          ],
+          "flashcards": [
+            {
+              "german": "Guten Tag",
+              "english": "Good day / Hello",
+              "article": null,
+              "plural": null,
+              "ipa": "/ˌɡuːtn̩ ˈtaːk/",
+              "part_of_speech": "phrase",
+              "example_de": "Guten Tag, Herr Weber!",
+              "example_en": "Good day, Mr. Weber!",
+              "grammar_note": "Accusative masculine form (der Tag -> guten Tag)."
+            },
+            {
+              "german": "Auf Wiedersehen",
+              "english": "Goodbye (formal)",
+              "article": null,
+              "plural": null,
+              "ipa": "/aʊf ˈviːdɐˌzeːən/",
+              "part_of_speech": "phrase",
+              "example_de": "Auf Wiedersehen und einen schönen Tag noch!",
+              "example_en": "Goodbye and have a nice day!",
+              "grammar_note": "Standard polite closing phrase across the DACH region."
+            },
+            {
+              "german": "Danke schön",
+              "english": "Thank you very much",
+              "article": null,
+              "plural": null,
+              "ipa": "/ˈdaŋkə ʃøːn/",
+              "part_of_speech": "phrase",
+              "example_de": "Danke schön für Ihre Hilfe.",
+              "example_en": "Thank you very much for your help.",
+              "grammar_note": "The polite answer is 'Bitte schön' (You are welcome)."
+            }
+          ]
+        },
+        {
+          "order_index": 2,
+          "slug": "a1-u1-l2-artikel-der-die-das",
+          "title": "Articles & The Gender Matrix (Der, Die, Das)",
+          "title_de": "Bestimmte Artikel: Der, Die, Das",
+          "type": "grammar",
+          "summary": "Understand how German assigns masculine (der), feminine (die), and neuter (das) genders to every noun.",
+          "xp_reward": 30,
+          "est_minutes": 18,
+          "is_free_tier": true,
+          "exercises": [
+            {
+              "order_index": 1,
+              "type": "article_gender",
+              "prompt": "Select the correct article for: 'Bahnhof' (train station)",
+              "prompt_de": "___ Bahnhof",
+              "options": ["der", "die", "das"],
+              "answer": "der",
+              "explanation": "'Bahnhof' is masculine (der Bahnhof). Compound nouns take the gender of the last word: der Hof -> der Bahnhof.",
+              "grammar_tip": "Rule: All compound nouns take the gender of their final noun component.",
+              "skill_tag": "grammar",
+              "xp_points": 5
+            },
+            {
+              "order_index": 2,
+              "type": "article_gender",
+              "prompt": "Select the correct article for: 'Straße' (street)",
+              "prompt_de": "___ Straße",
+              "options": ["der", "die", "das"],
+              "answer": "die",
+              "explanation": "'Straße' is feminine (die Straße). Over 90% of nouns ending in '-e' denoting inanimate things are feminine.",
+              "grammar_tip": "Rule: Nouns ending in -e are almost always feminine (die).",
+              "skill_tag": "grammar",
+              "xp_points": 5
+            },
+            {
+              "order_index": 3,
+              "type": "fill_blank",
+              "prompt": "Fill in the blank with the correct neuter article: '___ Rathaus steht am Marktplatz.'",
+              "prompt_de": "___ Rathaus steht am Marktplatz.",
+              "options": ["Der", "Die", "Das"],
+              "answer": "Das",
+              "explanation": "'Rathaus' (town hall) is neuter because 'das Haus' is neuter: das Rat + Haus = das Rathaus.",
+              "grammar_tip": "Neuter nouns often end in -ment, -um, -chen, or -lein.",
+              "skill_tag": "writing",
+              "xp_points": 8
+            }
+          ],
+          "flashcards": [
+            {
+              "german": "Bahnhof",
+              "english": "train station",
+              "article": "der",
+              "plural": "die Bahnhöfe",
+              "ipa": "/ˈbaːnˌhoːf/",
+              "part_of_speech": "noun",
+              "example_de": "Der Zug fährt pünktlich am Bahnhof ab.",
+              "example_en": "The train departs on time from the train station.",
+              "grammar_note": "Masculine noun (der). Plural forms with an Umlaut (ä)."
+            },
+            {
+              "german": "Straße",
+              "english": "street",
+              "article": "die",
+              "plural": "die Straßen",
+              "ipa": "/ˈʃtʁaːsə/",
+              "part_of_speech": "noun",
+              "example_de": "Die Straße ist ruhig und sauber.",
+              "example_en": "The street is quiet and clean.",
+              "grammar_note": "Feminine noun (die). Notice the 'ß' (Eszett) following a long vowel."
+            },
+            {
+              "german": "Rathaus",
+              "english": "town hall",
+              "article": "das",
+              "plural": "die Rathäuser",
+              "ipa": "/ˈʁaːtˌhaʊs/",
+              "part_of_speech": "noun",
+              "example_de": "Das historische Rathaus befindet sich im Zentrum.",
+              "example_en": "The historical town hall is located in the city center.",
+              "grammar_note": "Neuter noun (das). Compound noun ending in 'das Haus'."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "level_code": "a1",
+      "slug": "a1-placement-diagnostic",
+      "title": "A1 Adaptive Placement Diagnostic",
+      "test_type": "placement",
+      "time_limit_minutes": 15,
+      "passing_score_pct": 70,
+      "total_points": 25,
+      "questions": [
+        {
+          "question_order": 1,
+          "section": "grammar",
+          "points": 5,
+          "prompt": "Welcher Artikel ist richtig? '___ Apfel ist rot.' (The apple is red)",
+          "options": ["Der", "Die", "Das"],
+          "correct_answer": "Der",
+          "explanation": "'Apfel' is masculine in German: der Apfel."
+        },
+        {
+          "question_order": 2,
+          "section": "reading",
+          "points": 5,
+          "prompt": "Was bedeutet 'Ich hätte gerne ein Wasser, bitte'?",
+          "options": [
+            "I would like a water, please",
+            "Where is the water?",
+            "I do not like water",
+            "Water is expensive"
+          ],
+          "correct_answer": "I would like a water, please",
+          "explanation": "'Ich hätte gerne...' is the polite Konjunktiv II form for ordering food and drinks."
+        },
+        {
+          "question_order": 3,
+          "section": "grammar",
+          "points": 5,
+          "prompt": "Welche Verbform passt? 'Wir ___ aus Deutschland.' (We come from Germany)",
+          "options": ["komme", "kommst", "kommen", "kommt"],
+          "correct_answer": "kommen",
+          "explanation": "The 1st person plural subject 'wir' takes the '-en' ending: wir kommen."
+        }
+      ]
+    }
+  ]
+}
