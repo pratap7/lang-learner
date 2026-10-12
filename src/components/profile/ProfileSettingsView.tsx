@@ -508,6 +508,25 @@ export function ProfileSettingsView() {
               </Button>
             </form>
 
+            {/* Subscription & Billing Section */}
+            <div className="pt-6 border-t border-[var(--color-border)]">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <h3 className="font-heading text-sm font-semibold text-[var(--color-text-primary)]">
+                    Subscription & Billing
+                  </h3>
+                  <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
+                    Manage your Deutsch Pro plan, 7-day trial, invoices, and pause settings.
+                  </p>
+                </div>
+                <Link href="/settings/billing">
+                  <Button variant="outline" size="sm" rightIcon={<ArrowRight size={13} />}>
+                    Billing Portal
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
             {/* Session Management */}
             <div className="pt-6 border-t border-[var(--color-border)]">
               <h3 className="font-heading text-sm font-semibold text-[var(--color-text-primary)] mb-2">

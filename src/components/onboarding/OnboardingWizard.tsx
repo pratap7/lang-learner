@@ -13,6 +13,9 @@ import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/components/ui/Toast";
+import { DeutschMascot } from "@/components/mascot/DeutschMascot";
+import { playClickSound, playCompletionFanfare, playSuccessChime, triggerHaptic } from "@/lib/soundEffects";
+import { fireConfetti } from "@/lib/confetti";
 import type { LearningReason, CefrLevel, DailyStudyMinutes } from "@/types/database.types";
 
 const REASONS: { id: LearningReason; title: string; desc: string; icon: typeof Plane }[] = [
@@ -89,13 +92,29 @@ export function OnboardingWizard() {
     return Math.round(levelsDistance * 12 * speedFactor);
   };
 
+  const [isCalculatingPlan, setIsCalculatingPlan] = useState(false);
+
   const handleNext = () => {
-    if (step < 4) {
+    triggerHaptic("selection");
+    playClickSound();
+
+    if (step === 3) {
+      setIsCalculatingPlan(true);
+      setTimeout(() => {
+        setIsCalculatingPlan(false);
+        setStep(4);
+        playCompletionFanfare();
+        triggerHaptic("success");
+        fireConfetti();
+      }, 1200);
+    } else if (step < 4) {
       setStep((s) => s + 1);
     }
   };
 
   const handleBack = () => {
+    triggerHaptic("selection");
+    playClickSound();
     if (step > 1) {
       setStep((s) => s - 1);
     }
@@ -417,8 +436,44 @@ export function OnboardingWizard() {
             </motion.div>
           )}
 
+          {/* Calculating Plan Loading State */}
+          {isCalculatingPlan && (
+            <motion.div
+              key="calculating"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="py-12 flex flex-col items-center justify-center text-center space-y-4"
+            >
+              <DeutschMascot
+                state="thinking"
+                size="lg"
+                speechBubble={{
+                  de: "Ich berechne deine optimale Lernroute...",
+                  en: "Calculating your optimal study route...",
+                }}
+              />
+              <div className="space-y-1.5 pt-2">
+                <h3 className="font-heading text-lg font-bold text-[var(--color-text-primary)]">
+                  Generating Your Personalised German Pathway
+                </h3>
+                <div className="flex flex-col gap-1.5 text-xs text-[var(--color-text-muted)] max-w-xs mx-auto text-left pt-2">
+                  <div className="flex items-center gap-2 text-[var(--color-success)]">
+                    <CheckCircle2 size={13} /> Calibrating {currentLevel.toUpperCase()} entry baseline
+                  </div>
+                  <div className="flex items-center gap-2 text-[var(--color-success)]">
+                    <CheckCircle2 size={13} /> Structuring daily {dailyMinutes}-min micro-sessions
+                  </div>
+                  <div className="flex items-center gap-2 text-[var(--color-accent-400)] animate-pulse">
+                    <Sparkles size={13} /> Projecting target {targetLevel.toUpperCase()} exam timeline
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* STEP 4: Plan Confirmation */}
-          {step === 4 && (
+          {step === 4 && !isCalculatingPlan && (
             <motion.div
               key="step4"
               initial={{ opacity: 0, x: 20 }}
@@ -427,16 +482,26 @@ export function OnboardingWizard() {
               transition={{ duration: 0.25 }}
               className="space-y-6"
             >
-              <div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-brand-500)]/15 border border-[var(--color-brand-500)]/30 text-[var(--color-brand-400)] text-xs font-semibold mb-2">
-                  <Sparkles size={14} /> Plan Generated
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-brand-500)]/15 border border-[var(--color-brand-500)]/30 text-[var(--color-brand-400)] text-xs font-semibold mb-2">
+                    <Sparkles size={14} /> Plan Generated
+                  </div>
+                  <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--color-text-primary)]">
+                    Your Personalised Roadmap
+                  </h2>
+                  <p className="text-sm text-[var(--color-text-secondary)] mt-1">
+                    Here is your structured German learning trajectory based on your preferences.
+                  </p>
                 </div>
-                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--color-text-primary)]">
-                  Your Personalised Roadmap
-                </h2>
-                <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-                  Here is your structured German learning trajectory based on your preferences.
-                </p>
+                <DeutschMascot
+                  state="celebrating"
+                  size="md"
+                  speechBubble={{
+                    de: "Dein Plan ist fertig!",
+                    en: "Your plan is ready!",
+                  }}
+                />
               </div>
 
               {/* Summary Overview Card */}

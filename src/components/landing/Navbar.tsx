@@ -3,14 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Menu, X, Moon, Sun, Zap, User } from "lucide-react";
+import { BookOpen, Menu, X, Moon, Sun, Zap, User, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { AudioToggle } from "@/components/ui/AudioToggle";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Courses", href: "/courses" },
   { label: "Stories", href: "/stories" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Insights", href: "/insights" },
   { label: "Writing", href: "/writing" },
   { label: "AI Chat", href: "/conversation" },
@@ -121,6 +123,8 @@ export function Navbar() {
 
           {/* Actions */}
           <div className="flex items-center gap-2">
+            <AudioToggle />
+
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"

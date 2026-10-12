@@ -96,3 +96,5 @@ export function triggerConfetti() {
 
   animationFrameId = requestAnimationFrame(render);
 }
+
+export const fireConfetti = triggerConfetti;
