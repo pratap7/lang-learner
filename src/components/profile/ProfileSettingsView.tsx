@@ -668,6 +668,30 @@ export function ProfileSettingsView() {
               </div>
             </div>
 
+            {/* Admin & Operations Console Section */}
+            <div className="pt-6 border-t border-[var(--color-border)]">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-heading text-sm font-semibold text-[var(--color-text-primary)]">
+                      Admin &amp; Operations Console
+                    </h3>
+                    <span className="px-1.5 py-0.5 text-[10px] font-bold rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                      RBAC
+                    </span>
+                  </div>
+                  <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
+                    Curriculum authoring, native reviews, customer billing, support tickets, feature flags, and business KPIs.
+                  </p>
+                </div>
+                <Link href="/admin">
+                  <Button variant="primary" size="sm" rightIcon={<ArrowRight size={13} />}>
+                    Open Admin Area
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
             {/* Session Management */}
             <div className="pt-6 border-t border-[var(--color-border)]">
               <h3 className="font-heading text-sm font-semibold text-[var(--color-text-primary)] mb-2">
