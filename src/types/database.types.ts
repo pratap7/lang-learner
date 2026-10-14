@@ -388,6 +388,240 @@ export type Database = {
           }
         ];
       };
+      user_consents: {
+        Row: {
+          id: string;
+          user_id: string;
+          consent_essential: boolean;
+          consent_analytics: boolean;
+          consent_voice_retention: boolean;
+          ip_hash: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          consent_essential?: boolean;
+          consent_analytics?: boolean;
+          consent_voice_retention?: boolean;
+          ip_hash?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          consent_essential?: boolean;
+          consent_analytics?: boolean;
+          consent_voice_retention?: boolean;
+          ip_hash?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      voice_recordings: {
+        Row: {
+          id: string;
+          user_id: string;
+          exercise_id: string;
+          audio_url: string;
+          mime_type: string;
+          file_size_bytes: number;
+          opted_in_for_storage: boolean;
+          expires_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          exercise_id: string;
+          audio_url: string;
+          mime_type: string;
+          file_size_bytes: number;
+          opted_in_for_storage?: boolean;
+          expires_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          exercise_id?: string;
+          audio_url?: string;
+          mime_type?: string;
+          file_size_bytes?: number;
+          opted_in_for_storage?: boolean;
+          expires_at?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      billing_audit_logs: {
+        Row: {
+          id: string;
+          user_id: string | null;
+          provider: string;
+          event_type: string;
+          provider_event_id: string | null;
+          payload_hash: string;
+          payload: Json;
+          ip_address: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id?: string | null;
+          provider: string;
+          event_type: string;
+          provider_event_id?: string | null;
+          payload_hash: string;
+          payload: Json;
+          ip_address?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string | null;
+          provider?: string;
+          event_type?: string;
+          provider_event_id?: string | null;
+          payload_hash?: string;
+          payload?: Json;
+          ip_address?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      writing_submissions: {
+        Row: {
+          id: string;
+          user_id: string;
+          task_id: string;
+          original_text: string;
+          corrected_text: string | null;
+          total_score: number | null;
+          percentage: number | null;
+          cefr_rating: string;
+          word_count: number;
+          rubric_scores: Json;
+          error_list: Json;
+          suggestions: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          task_id: string;
+          original_text: string;
+          corrected_text?: string | null;
+          total_score?: number | null;
+          percentage?: number | null;
+          cefr_rating: string;
+          word_count: number;
+          rubric_scores?: Json;
+          error_list?: Json;
+          suggestions?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          task_id?: string;
+          original_text?: string;
+          corrected_text?: string | null;
+          total_score?: number | null;
+          percentage?: number | null;
+          cefr_rating?: string;
+          word_count?: number;
+          rubric_scores?: Json;
+          error_list?: Json;
+          suggestions?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      user_data_exports: {
+        Row: {
+          id: string;
+          user_id: string;
+          export_type: string;
+          status: string;
+          download_url: string | null;
+          created_at: string;
+          completed_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          export_type?: string;
+          status?: string;
+          download_url?: string | null;
+          created_at?: string;
+          completed_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          export_type?: string;
+          status?: string;
+          download_url?: string | null;
+          created_at?: string;
+          completed_at?: string | null;
+        };
+        Relationships: [];
+      };
+      lesson_progress: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+        Relationships: [];
+      };
+      exercise_attempts: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+        Relationships: [];
+      };
+      flashcards: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+        Relationships: [];
+      };
+      srs_reviews: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+        Relationships: [];
+      };
+      mistakes: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+        Relationships: [];
+      };
+      streaks: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+        Relationships: [];
+      };
+      xp_events: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+        Relationships: [];
+      };
+      user_badges: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

@@ -1,14 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getScenarioById, CefrLevel } from "@/lib/conversationScenarios";
 import { VocabularyItem } from "@/lib/courseData";
-
-interface ReportRequestBody {
-  scenarioId: string;
-  userLevel?: CefrLevel;
-  durationSeconds: number;
-  messages: { role: "user" | "assistant"; content: string }[];
-  userId?: string;
-}
+import { ConversationReportSchema } from "@/lib/validations/apiSchemas";
+import { checkRateLimit, getClientIp } from "@/lib/security/rateLimiter";
+import { sanitizeStudentInput } from "@/lib/security/promptSanitizer";
 
 export interface GrammarCorrectionItem {
   id: string;
@@ -29,15 +24,60 @@ export interface ConversationFeedbackReport {
 }
 
 export async function POST(req: NextRequest) {
+  const clientIp = getClientIp(req);
+
+  // 1. Sliding window rate limiting on conversation report (20 req/min per IP)
+  const rateLimit = checkRateLimit(`conversation-report:${clientIp}`, 20, 60);
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      {
+        error: "RATE_LIMIT_EXCEEDED",
+        message: "Too many report requests. Please wait a moment.",
+      },
+      { status: 429, headers: rateLimit.headers }
+    );
+  }
+
   try {
-    const body = (await req.json()) as ReportRequestBody;
-    const { scenarioId, userLevel = "A1", durationSeconds = 60, messages = [] } = body;
+    let body: any;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json(
+        { error: "INVALID_JSON", message: "Malformed JSON body." },
+        { status: 400, headers: rateLimit.headers }
+      );
+    }
+
+    // 2. Strict Zod Schema Validation
+    const validation = ConversationReportSchema.safeParse(body);
+    if (!validation.success) {
+      return NextResponse.json(
+        {
+          error: "VALIDATION_ERROR",
+          message: "Invalid input parameters.",
+          issues: validation.error.issues.map((i) => ({ field: i.path.join("."), message: i.message })),
+        },
+        { status: 422, headers: rateLimit.headers }
+      );
+    }
+
+    const { scenarioId, userLevel, durationSeconds, messages } = validation.data;
 
     const scenario = getScenarioById(scenarioId);
-    const userMessages = messages.filter((m) => m.role === "user").map((m) => m.content);
+    if (!scenario) {
+      return NextResponse.json(
+        { error: "SCENARIO_NOT_FOUND", message: "Invalid scenario identifier." },
+        { status: 400, headers: rateLimit.headers }
+      );
+    }
+
+    const userMessages = messages
+      .filter((m) => m.role === "user")
+      .map((m) => sanitizeStudentInput(m.content).sanitized);
 
     // 1. Evaluate grammar errors post-session without interruption
-    const grammarErrors = analyzeGrammarErrors(userMessages, userLevel);
+    const grammarErrors = analyzeGrammarErrors(userMessages, userLevel as CefrLevel);
 
     // 2. Extract key scenario vocabulary tailored for the user's flashcards
     const vocabularyToReview = extractReviewVocabulary(scenarioId, userMessages);
@@ -56,7 +96,7 @@ export async function POST(req: NextRequest) {
 
     const report: ConversationFeedbackReport = {
       fluencyScore,
-      cefrEvaluation: userLevel,
+      cefrEvaluation: userLevel as CefrLevel,
       durationMinutes,
       turnsCount: turnCount,
       summary: generateSummary(fluencyScore, userLevel, turnCount, scenario?.titleDe || "Gespräch"),

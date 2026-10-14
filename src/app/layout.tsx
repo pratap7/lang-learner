@@ -5,6 +5,7 @@ import { AccessibilityProvider } from "@/lib/accessibility/AccessibilityContext"
 import { I18nProvider } from "@/lib/i18n/I18nContext";
 import dynamic from "next/dynamic";
 import { PwaRegister } from "@/components/pwa/PwaRegister";
+import { CookieConsentBanner } from "@/components/privacy/CookieConsentBanner";
 import "./globals.css";
 
 const KeyboardShortcutsModal = dynamic(
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
               <KeyboardShortcutsModal />
               <PwaRegister />
+              <CookieConsentBanner />
             </ToastProvider>
           </I18nProvider>
         </AccessibilityProvider>

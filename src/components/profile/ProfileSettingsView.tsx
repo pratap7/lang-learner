@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import {
   User, Mail, Clock, Calendar, Flame,
   Award, Save, LogOut, ShieldCheck, Sparkles,
-  BookOpen, ArrowRight, CheckCircle2, Zap
+  BookOpen, ArrowRight, CheckCircle2, Zap,
+  Download, Trash2, AlertTriangle, FileText, Lock
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -32,6 +33,14 @@ export function ProfileSettingsView() {
   const [targetLevel, setTargetLevel] = useState<CefrLevel>("b1");
   const [dailyMinutes, setDailyMinutes] = useState<DailyStudyMinutes>(20);
   const [examDate, setExamDate] = useState("");
+
+  // Privacy & GDPR states
+  const [exportingData, setExportingData] = useState(false);
+  const [voiceRetentionOptIn, setVoiceRetentionOptIn] = useState(false);
+  const [updatingConsent, setUpdatingConsent] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
+  const [deletingAccount, setDeletingAccount] = useState(false);
 
   useEffect(() => {
     async function loadProfile() {
@@ -202,6 +211,118 @@ export function ProfileSettingsView() {
     router.refresh();
   };
 
+  const handleExportData = async () => {
+    setExportingData(true);
+    try {
+      const res = await fetch("/api/gdpr/export");
+      if (!res.ok) {
+        throw new Error("Export failed");
+      }
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `deutsch-pfad-gdpr-export-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      addToast({
+        type: "success",
+        title: "Data Archive Downloaded",
+        message: "Your complete GDPR Article 20 data package has been exported.",
+      });
+    } catch (err: any) {
+      addToast({
+        type: "error",
+        title: "Export Error",
+        message: "Could not export your data archive. Please try again.",
+      });
+    } finally {
+      setExportingData(false);
+    }
+  };
+
+  const handleToggleVoiceRetention = async (optIn: boolean) => {
+    setUpdatingConsent(true);
+    try {
+      setVoiceRetentionOptIn(optIn);
+      const res = await fetch("/api/user/consent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          consentEssential: true,
+          consentAnalytics: false,
+          consentVoiceRetention: optIn,
+        }),
+      });
+      if (res.ok) {
+        addToast({
+          type: "success",
+          title: "Voice Retention Updated",
+          message: optIn
+            ? "Voice recordings will be retained for 30 days for pronunciation reviews."
+            : "Voice recordings will now be purged immediately after AI evaluation.",
+        });
+      }
+    } catch {
+      addToast({
+        type: "error",
+        title: "Update failed",
+        message: "Could not save consent preference.",
+      });
+    } finally {
+      setUpdatingConsent(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (deleteConfirmText !== "DELETE") {
+      addToast({
+        type: "error",
+        title: "Confirmation Required",
+        message: "Please type DELETE to confirm permanent account deletion.",
+      });
+      return;
+    }
+
+    setDeletingAccount(true);
+    try {
+      const res = await fetch("/api/gdpr/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ confirmation: "DELETE" }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || "Deletion request failed");
+      }
+
+      localStorage.clear();
+      document.cookie = "deutschpfad_demo_user=; path=/; max-age=0";
+
+      addToast({
+        type: "success",
+        title: "Account Permanently Erased",
+        message: "All your data has been purged in accordance with GDPR Article 17.",
+      });
+
+      setShowDeleteModal(false);
+      router.push("/");
+      router.refresh();
+    } catch (err: any) {
+      addToast({
+        type: "error",
+        title: "Erasure Failed",
+        message: err.message || "Failed to erase account. Please contact support.",
+      });
+    } finally {
+      setDeletingAccount(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto py-16 px-4 text-center">
@@ -301,6 +422,7 @@ export function ProfileSettingsView() {
           <TabsTrigger value="plan">Learning Plan & Goals</TabsTrigger>
           <TabsTrigger value="account">Account Settings</TabsTrigger>
           <TabsTrigger value="badges">Badges & Achievements</TabsTrigger>
+          <TabsTrigger value="privacy">Privacy & GDPR</TabsTrigger>
         </TabsList>
 
         {/* TAB 1: Learning Plan */}
@@ -652,7 +774,178 @@ export function ProfileSettingsView() {
             </div>
           </div>
         </TabsContent>
+
+        {/* TAB 4: Privacy & GDPR */}
+        <TabsContent value="privacy">
+          <div className="p-6 sm:p-8 rounded-[var(--radius-2xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm space-y-8">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <ShieldCheck size={20} className="text-[var(--color-brand-500)]" />
+                <h2 className="font-heading text-lg font-bold text-[var(--color-text-primary)]">
+                  Privacy & Data Rights (GDPR)
+                </h2>
+              </div>
+              <p className="text-xs text-[var(--color-text-secondary)]">
+                You retain complete control over your personal data. We comply strictly with EU General Data Protection Regulation standards.
+              </p>
+            </div>
+
+            {/* Article 20: Data Portability */}
+            <div className="p-5 rounded-[var(--radius-xl)] bg-[var(--color-surface-2)]/60 border border-[var(--color-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <p className="text-sm font-semibold text-[var(--color-text-primary)]">
+                  Download Personal Data Package
+                </p>
+                <p className="text-xs text-[var(--color-text-secondary)]">
+                  Export all your lesson progress, flashcards, writing submissions, and test history in machine-readable JSON format (GDPR Article 20).
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleExportData}
+                loading={exportingData}
+                leftIcon={<Download size={14} />}
+                className="shrink-0"
+              >
+                Export JSON Archive
+              </Button>
+            </div>
+
+            {/* Voice Audio Retention Rules */}
+            <div className="p-5 rounded-[var(--radius-xl)] bg-[var(--color-surface-2)]/60 border border-[var(--color-border)] space-y-3">
+              <div className="flex items-start justify-between gap-4">
+                <div className="space-y-1">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">
+                    Voice Recording Retention Policy
+                  </p>
+                  <p className="text-xs text-[var(--color-text-secondary)]">
+                    By default, Deutsch Pfad evaluates pronunciation audio in volatile memory and deletes it immediately after generating feedback. You can optionally opt in to retain recordings for 30 days to review pronunciation improvements.
+                  </p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                  <input
+                    type="checkbox"
+                    checked={voiceRetentionOptIn}
+                    disabled={updatingConsent}
+                    onChange={(e) => handleToggleVoiceRetention(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-[var(--color-surface-3)] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:width-5 after:transition-all peer-checked:bg-[var(--color-brand-500)]" />
+                </label>
+              </div>
+              <div className="text-[11px] text-[var(--color-text-muted)] flex items-center gap-1.5">
+                <CheckCircle2 size={13} className="text-[var(--color-success)]" />
+                Current status:{" "}
+                <span className="font-semibold text-[var(--color-text-primary)]">
+                  {voiceRetentionOptIn
+                    ? "Opted-in: Audio kept encrypted for 30 days"
+                    : "Strict Default: Audio purged immediately after scoring"}
+                </span>
+              </div>
+            </div>
+
+            {/* Legal Documents */}
+            <div className="pt-2 border-t border-[var(--color-border)] flex flex-wrap items-center gap-4 text-xs text-[var(--color-text-secondary)]">
+              <span>Legal agreements:</span>
+              <Link href="/privacy" className="text-[var(--color-brand-500)] hover:underline inline-flex items-center gap-1">
+                <FileText size={12} /> Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-[var(--color-brand-500)] hover:underline inline-flex items-center gap-1">
+                <FileText size={12} /> Terms of Service
+              </Link>
+              <Link href="/refund" className="text-[var(--color-brand-500)] hover:underline inline-flex items-center gap-1">
+                <FileText size={12} /> Refund Policy
+              </Link>
+            </div>
+
+            {/* Danger Zone: Article 17 Erasure */}
+            <div className="pt-6 border-t border-[var(--color-error)]/30">
+              <div className="p-5 rounded-[var(--radius-xl)] bg-[color-mix(in_srgb,var(--color-error)_5%,transparent)] border border-[var(--color-error)]/30 space-y-3">
+                <div className="flex items-center gap-2 text-[var(--color-error)] font-bold text-sm">
+                  <AlertTriangle size={16} />
+                  Danger Zone: GDPR Article 17 Erasure ("Right to be Forgotten")
+                </div>
+                <p className="text-xs text-[var(--color-text-secondary)]">
+                  Permanently erase your user profile, writing essays, flashcard history, streak counts, and learning telemetry. This action is irreversible.
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowDeleteModal(true)}
+                  leftIcon={<Trash2 size={14} />}
+                  className="text-[var(--color-error)] border-[var(--color-error)]/40 hover:bg-[color-mix(in_srgb,var(--color-error)_15%,transparent)]"
+                >
+                  Delete Account &amp; Purge All Data
+                </Button>
+              </div>
+            </div>
+          </div>
+        </TabsContent>
       </Tabs>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in"
+        >
+          <div className="w-full max-w-md rounded-[var(--radius-2xl)] bg-[var(--color-surface)] border border-[var(--color-error)]/40 p-6 shadow-2xl space-y-5">
+            <div className="flex items-center gap-3 text-[var(--color-error)]">
+              <div className="w-10 h-10 rounded-full bg-[color-mix(in_srgb,var(--color-error)_15%,transparent)] flex items-center justify-center shrink-0">
+                <AlertTriangle size={20} />
+              </div>
+              <div>
+                <h3 className="font-heading text-base font-bold text-[var(--color-text-primary)]">
+                  Permanent Account Erasure
+                </h3>
+                <p className="text-xs text-[var(--color-error)]">This cannot be undone</p>
+              </div>
+            </div>
+
+            <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
+              All your German learning streaks, progress, vocabulary flashcards, writing submissions, and conversation records will be permanently expunged.
+            </p>
+
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-[var(--color-text-primary)]">
+                Type <span className="font-mono text-[var(--color-error)]">DELETE</span> to confirm:
+              </label>
+              <input
+                type="text"
+                value={deleteConfirmText}
+                onChange={(e) => setDeleteConfirmText(e.target.value)}
+                placeholder="DELETE"
+                className="w-full px-3 py-2 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-2)] text-sm font-mono focus:outline-none focus:border-[var(--color-error)] focus:ring-2 focus:ring-[var(--color-error)]/20"
+              />
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-[var(--color-border)]">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setDeleteConfirmText("");
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                loading={deletingAccount}
+                disabled={deleteConfirmText !== "DELETE"}
+                onClick={handleDeleteAccount}
+                className="bg-[var(--color-error)] text-white hover:bg-[color-mix(in_srgb,var(--color-error)_80%,black)] border-transparent"
+              >
+                Permanently Erase Everything
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
