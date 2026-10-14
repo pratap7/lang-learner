@@ -16,6 +16,8 @@ import {
   ExternalLink,
   Layers,
   Lock,
+  Calendar,
+  Activity,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -28,6 +30,8 @@ import {
 } from "@/lib/adminService";
 import { ROLE_PERMISSIONS, type AdminRole } from "@/types/admin";
 import { AdminDashboardTab } from "./AdminDashboardTab";
+import { AdminWeeklyMetricsTab } from "./AdminWeeklyMetricsTab";
+import { AdminAnalyticsTab } from "./AdminAnalyticsTab";
 import { AdminContentTab } from "./AdminContentTab";
 import { AdminUsersTab } from "./AdminUsersTab";
 import { AdminSupportTab } from "./AdminSupportTab";
@@ -36,6 +40,8 @@ import { AdminAuditLogsTab } from "./AdminAuditLogsTab";
 
 type AdminTabKey =
   | "dashboard"
+  | "weekly_metrics"
+  | "analytics"
   | "content"
   | "users"
   | "support"
@@ -74,6 +80,18 @@ export function AdminLayout() {
       key: "dashboard" as const,
       label: "Executive Dashboard",
       icon: LayoutDashboard,
+      allowed: permissions.canViewAnalytics,
+    },
+    {
+      key: "weekly_metrics" as const,
+      label: "Weekly Monday Metrics",
+      icon: Calendar,
+      allowed: permissions.canViewAnalytics,
+    },
+    {
+      key: "analytics" as const,
+      label: "Product Analytics & Sentry",
+      icon: Activity,
       allowed: permissions.canViewAnalytics,
     },
     {
@@ -247,6 +265,8 @@ export function AdminLayout() {
         {/* Tab Content Panes */}
         <main className="pb-16">
           {activeTab === "dashboard" && permissions.canViewAnalytics && <AdminDashboardTab />}
+          {activeTab === "weekly_metrics" && permissions.canViewAnalytics && <AdminWeeklyMetricsTab />}
+          {activeTab === "analytics" && permissions.canViewAnalytics && <AdminAnalyticsTab />}
           {activeTab === "content" && permissions.canManageContent && <AdminContentTab />}
           {activeTab === "users" && permissions.canManageUsers && <AdminUsersTab />}
           {activeTab === "support" && (permissions.canManageUsers || currentAdmin.role === "curator") && (
