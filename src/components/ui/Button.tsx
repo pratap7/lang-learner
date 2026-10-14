@@ -47,12 +47,12 @@ const buttonVariants = cva(
         ],
       },
       size: {
-        xs:  "h-7  px-3   text-xs  rounded-[var(--radius-md)]",
-        sm:  "h-8  px-4   text-sm  rounded-[var(--radius-md)]",
-        md:  "h-10 px-5   text-sm  rounded-[var(--radius-lg)]",
-        lg:  "h-12 px-6   text-base rounded-[var(--radius-lg)]",
-        xl:  "h-14 px-8   text-base rounded-[var(--radius-xl)]",
-        icon:"h-10 w-10         rounded-[var(--radius-lg)]",
+        xs:  "min-h-[32px] h-8  px-3   text-xs  rounded-[var(--radius-md)]",
+        sm:  "min-h-[38px] h-9  px-4   text-xs sm:text-sm rounded-[var(--radius-md)]",
+        md:  "min-h-[44px] h-11 px-5   text-sm  rounded-[var(--radius-lg)]",
+        lg:  "min-h-[48px] h-12 px-6   text-base rounded-[var(--radius-lg)]",
+        xl:  "min-h-[52px] h-14 px-8   text-base rounded-[var(--radius-xl)]",
+        icon:"min-h-[44px] min-w-[44px] h-11 w-11 rounded-[var(--radius-lg)]",
       },
     },
     defaultVariants: {

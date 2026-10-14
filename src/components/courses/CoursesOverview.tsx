@@ -76,8 +76,8 @@ export function CoursesOverview() {
     <div className="min-h-screen bg-[var(--color-bg)] pb-24">
       {/* Top Header Hero */}
       <div className="relative border-b border-[var(--color-border)] bg-[var(--color-surface)]/70 backdrop-blur-xl pb-12 overflow-hidden">
-        {/* Subtle German flag tricolor bar at top */}
-        <div className="h-1 w-full tricolor-stripe opacity-90 absolute top-0 left-0 right-0" />
+        {/* Subtle Brand gradient bar at top */}
+        <div className="h-1 w-full bg-gradient-to-r from-[var(--color-brand-600)] via-[var(--color-brand-500)] to-[var(--color-accent-500)] opacity-90 absolute top-0 left-0 right-0" />
 
         {/* Top Navigation Row */}
         <div className="container-xl pt-4 pb-6 flex items-center justify-between border-b border-[var(--color-border)]/50 mb-8">

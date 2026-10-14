@@ -62,9 +62,8 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  // Protected route checking
-  const isProtectedRoute = pathname.startsWith("/onboarding") ||
-    pathname.startsWith("/settings");
+  // Protected route checking (onboarding is public so new users experience value first)
+  const isProtectedRoute = pathname.startsWith("/settings");
 
   const isAuthRoute = pathname.startsWith("/auth/login") ||
     pathname.startsWith("/auth/signup");

@@ -53,38 +53,38 @@ export function ContextualPaywallModal({
     switch (triggerMoment) {
       case "ai_limit":
         return {
-          badge: "AI Practice Cap Reached",
-          headline: customHeadline || "Keep Speaking & Writing Without Interruption",
+          badge: "AI Practice Allowance",
+          headline: customHeadline || "Keep Practicing Speaking & Writing Without Interruption",
           subtext:
             customSubtext ||
-            "You have hit your free monthly AI practice limit. Unlock 150 minutes of voice dialogue and full Goethe-standard writing evaluation with Deutsch Pro.",
+            "You have completed your complimentary monthly AI conversation minutes. Deutsch Pfad Pro unlocks 150 monthly voice minutes, detailed pronunciation coaching, and unlimited Goethe rubric evaluations.",
           mascotSpeech: "Du machst tolle Fortschritte! Lass uns weitersprechen.",
         };
       case "mock_test":
         return {
-          badge: "Exam Simulation Completed",
-          headline: customHeadline || "Unlock Complete Examiner Report & Certificate",
+          badge: "Examination Simulation Completed",
+          headline: customHeadline || "Unlock Complete Examiner Report & Rubric Breakdown",
           subtext:
             customSubtext ||
-            "Get detailed CEFR competency breakdowns, examiner rubric corrections, and official Goethe/telc predicted scoring with Deutsch Pro.",
-          mascotSpeech: "Super Prüfung! Schalte deine detaillierte Analyse frei.",
+            "Get detailed CEFR competency breakdowns, examiner correction diffs, and official Goethe/telc predicted scoring with Deutsch Pfad Pro.",
+          mascotSpeech: "Hervorragende Leistung! Schalte deine detaillierte Analyse frei.",
         };
       case "locked_content":
         return {
-          badge: "Full Curriculum Access",
-          headline: customHeadline || "Unlock the Complete A1–B2 Pathway",
+          badge: "Full CEFR Pathway",
+          headline: customHeadline || "Unlock the Complete A1–C2 Curriculum",
           subtext:
             customSubtext ||
-            "Access every grammar module, graded story with synchronized audio, and unlimited spaced repetition flashcards.",
+            "Access every grammar module, graded story with synchronized native audio, and unlimited spaced repetition flashcards.",
           mascotSpeech: "Schalte alle Lektionen frei!",
         };
       default:
         return {
           badge: "Accelerate Your German",
-          headline: customHeadline || "Reach German Fluency 3x Faster",
+          headline: customHeadline || "Accelerate Your Path to German Fluency",
           subtext:
             customSubtext ||
-            "Start your 7-day free trial. Unlock full AI conversation, Goethe & telc mock tests, and personalized study pacing.",
+            "Start your 7-day free trial. Unlock conversational AI practice, Goethe & telc mock tests, and personalized study pacing.",
           mascotSpeech: "Starte deine 7 Tage kostenlos!",
         };
     }

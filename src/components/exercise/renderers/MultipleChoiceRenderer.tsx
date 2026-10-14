@@ -49,7 +49,7 @@ export function MultipleChoiceRenderer({
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-3">
+      <div role="radiogroup" aria-label="Multiple choice options" className="grid grid-cols-1 gap-3">
         {exercise.options.map((option, idx) => {
           const isSelected = userAnswer === option.id;
           const showSuccess = isSubmitted && option.isCorrect;
@@ -59,6 +59,9 @@ export function MultipleChoiceRenderer({
             <motion.button
               key={option.id}
               type="button"
+              role="radio"
+              aria-checked={isSelected}
+              aria-label={`Option ${idx + 1}: ${option.text}${option.translation ? ` (${option.translation})` : ""}`}
               disabled={disabled || isSubmitted}
               onClick={() => onAnswerChange(option.id)}
               whileHover={!isSubmitted ? { scale: 1.01 } : {}}

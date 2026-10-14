@@ -33,6 +33,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { useToast } from "@/components/ui/Toast";
 import {
   GRADED_STORIES,
@@ -429,7 +430,20 @@ export function StoriesLibrary() {
           </div>
 
           {/* ─── MAIN STORIES GRID ────────────────────────────────────────── */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredStories.length === 0 ? (
+            <EmptyState
+              icon={BookOpen}
+              title="No Stories Match Filters"
+              description="No German graded stories matched your current search criteria. Try selecting 'ALL' levels or clearing the search text."
+              actionLabel="Show All Stories"
+              onAction={() => {
+                setSelectedLevel("ALL");
+                setSelectedCategory("ALL");
+                setSearchQuery("");
+              }}
+            />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredStories.map((story) => {
               const isRead = completedIds.includes(story.id);
 
@@ -487,7 +501,8 @@ export function StoriesLibrary() {
                 </div>
               );
             })}
-          </div>
+            </div>
+          )}
         </div>
       )}
 

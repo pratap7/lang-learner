@@ -97,9 +97,18 @@ export function GoalManagerView() {
 
   if (!settings || !pacing) {
     return (
-      <div className="max-w-4xl mx-auto py-20 px-4 text-center">
-        <div className="w-10 h-10 border-2 border-[var(--color-brand-500)] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-xs text-[var(--color-text-muted)]">Loading goal trajectory...</p>
+      <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 space-y-8 animate-pulse">
+        <div className="space-y-3 pb-6 border-b border-[var(--color-border)]">
+          <div className="h-6 w-48 bg-[var(--color-surface-2)] rounded-full" />
+          <div className="h-10 w-72 bg-[var(--color-surface-2)] rounded-[var(--radius-lg)]" />
+          <div className="h-4 w-96 bg-[var(--color-surface-2)] rounded-[var(--radius-md)]" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="h-48 bg-[var(--color-surface-2)] rounded-[var(--radius-xl)]" />
+          <div className="h-48 bg-[var(--color-surface-2)] rounded-[var(--radius-xl)]" />
+          <div className="h-48 bg-[var(--color-surface-2)] rounded-[var(--radius-xl)]" />
+        </div>
+        <div className="h-64 bg-[var(--color-surface-2)] rounded-[var(--radius-2xl)]" />
       </div>
     );
   }

@@ -331,7 +331,7 @@ export function FlashcardPlayer({
                     : currentCard.german;
                   speakGerman(phrase);
                 }}
-                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                className={`w-11 h-11 min-h-[44px] min-w-[44px] rounded-full flex items-center justify-center transition-all cursor-pointer ${
                   isPlayingAudio
                     ? "bg-[var(--color-brand-500)] text-white scale-110 shadow-lg animate-pulse"
                     : "bg-[var(--color-surface-2)] text-[var(--color-brand-400)] hover:bg-[var(--color-brand-500)]/20 hover:scale-105 border border-[var(--color-border)] shadow-sm"
@@ -378,10 +378,10 @@ export function FlashcardPlayer({
                   e.stopPropagation();
                   speakGerman(currentCard.exampleDe);
                 }}
-                className="w-9 h-9 rounded-full bg-[var(--color-surface-2)] text-[var(--color-brand-400)] hover:bg-[var(--color-brand-500)]/20 flex items-center justify-center border border-[var(--color-border)] transition-colors cursor-pointer"
+                className="w-11 h-11 min-h-[44px] min-w-[44px] rounded-full bg-[var(--color-surface-2)] text-[var(--color-brand-400)] hover:bg-[var(--color-brand-500)]/20 flex items-center justify-center border border-[var(--color-border)] transition-colors cursor-pointer"
                 title="Listen to example sentence"
               >
-                <Volume2 size={16} />
+                <Volume2 size={18} />
               </button>
             </div>
 
@@ -434,13 +434,13 @@ export function FlashcardPlayer({
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="grid grid-cols-4 gap-2 sm:gap-3"
+            className="grid grid-cols-4 gap-1.5 sm:gap-3"
           >
             {/* Again */}
             <button
               type="button"
               onClick={() => handleRate("again")}
-              className="p-3 sm:p-3.5 rounded-[var(--radius-xl)] border-2 border-rose-500/40 bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 text-center transition-all cursor-pointer shadow-xs active:scale-95 flex flex-col items-center justify-center"
+              className="p-2 sm:p-3.5 min-h-[52px] rounded-[var(--radius-xl)] border-2 border-rose-500/40 bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 text-center transition-all cursor-pointer shadow-xs active:scale-95 flex flex-col items-center justify-center"
             >
               <span className="text-[10px] font-mono opacity-80 mb-0.5">1</span>
               <span className="font-heading text-xs sm:text-sm font-bold">Again</span>

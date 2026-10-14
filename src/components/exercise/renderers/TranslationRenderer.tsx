@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, CornerDownLeft } from "lucide-react";
 import { TranslationExercise } from "@/types/exercise.types";
 import { playClickSound } from "@/lib/soundEffects";
+import { UmlautKeyboardBar } from "@/components/ui/UmlautKeyboardBar";
 
 interface TranslationRendererProps {
   exercise: TranslationExercise;
@@ -14,8 +15,6 @@ interface TranslationRendererProps {
   isCorrect: boolean | null;
   disabled?: boolean;
 }
-
-const GERMAN_SPECIAL_CHARS = ["ä", "ö", "ü", "ß", "Ä", "Ö", "Ü"];
 
 export function TranslationRenderer({
   exercise,
@@ -81,6 +80,7 @@ export function TranslationRenderer({
             disabled={disabled || isSubmitted}
             value={userAnswer}
             onChange={(e) => onAnswerChange(e.target.value)}
+            aria-label={exercise.direction === "en_to_de" ? "German translation response" : "English translation response"}
             placeholder={
               exercise.direction === "en_to_de"
                 ? "Schreibe die deutsche Übersetzung..."
@@ -99,24 +99,10 @@ export function TranslationRenderer({
 
         {/* German Special Characters Bar (Umlauts & Eszett) */}
         {exercise.direction === "en_to_de" && !isSubmitted && (
-          <div className="flex flex-wrap items-center justify-between gap-2 p-2.5 rounded-[var(--radius-lg)] bg-[var(--color-surface-2)] border border-[var(--color-border)]">
-            <span className="text-xs text-[var(--color-text-muted)] font-medium pl-1">
-              German Letters:
-            </span>
-            <div className="flex items-center gap-1.5">
-              {GERMAN_SPECIAL_CHARS.map((char) => (
-                <button
-                  key={char}
-                  type="button"
-                  disabled={disabled}
-                  onClick={() => insertChar(char)}
-                  className="w-8 h-8 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-brand-500)] hover:bg-[var(--color-surface-3)] text-sm font-bold font-mono text-[var(--color-text-primary)] transition-all cursor-pointer active:scale-95"
-                >
-                  {char}
-                </button>
-              ))}
-            </div>
-          </div>
+          <UmlautKeyboardBar
+            onInsert={insertChar}
+            disabled={disabled}
+          />
         )}
       </div>
     </div>

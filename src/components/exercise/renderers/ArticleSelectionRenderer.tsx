@@ -92,18 +92,23 @@ export function ArticleSelectionRenderer({
         </div>
       </div>
 
-      {/* 3 Color-Coded Article Buttons */}
-      <div className="grid grid-cols-3 gap-3 sm:gap-4">
+      {/* 3 Color-Coded & Shape-Coded Article Buttons */}
+      <div role="radiogroup" aria-label={`Select article for ${exercise.noun}`} className="grid grid-cols-3 gap-3 sm:gap-4">
         {ARTICLES.map((art) => {
           const isSelected = userAnswer === art.code;
           const isTargetCorrect = exercise.correctArticle === art.code;
           const showSuccess = isSubmitted && isTargetCorrect;
           const showError = isSubmitted && isSelected && !isTargetCorrect;
 
+          const shapeIndicator = art.code === "der" ? "■" : art.code === "die" ? "●" : "◆";
+
           return (
             <motion.button
               key={art.code}
               type="button"
+              role="radio"
+              aria-checked={isSelected}
+              aria-label={`${art.code} - ${art.gender}`}
               disabled={disabled || isSubmitted}
               onClick={() => selectArticle(art.code)}
               whileHover={!isSubmitted ? { scale: 1.03 } : {}}
@@ -125,6 +130,11 @@ export function ArticleSelectionRenderer({
               {/* Keyboard shortcut hint */}
               <span className="absolute top-2 left-2 text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--color-surface-2)] text-[var(--color-text-muted)] border border-[var(--color-border)]">
                 {art.key}
+              </span>
+
+              {/* Color-blind safe shape badge */}
+              <span className="text-xs font-mono opacity-70" aria-hidden="true">
+                {shapeIndicator}
               </span>
 
               <span className="font-heading text-3xl sm:text-4xl font-extrabold uppercase tracking-wide">

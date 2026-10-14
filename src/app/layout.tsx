@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, Outfit, Fraunces } from "next/font/google";
 import { ToastProvider } from "@/components/ui/Toast";
+import { AccessibilityProvider } from "@/lib/accessibility/AccessibilityContext";
+import { I18nProvider } from "@/lib/i18n/I18nContext";
 import { KeyboardShortcutsModal } from "@/components/ui/KeyboardShortcutsModal";
 import { PwaRegister } from "@/components/pwa/PwaRegister";
 import "./globals.css";
@@ -8,6 +10,12 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
   display: "swap",
 });
 
@@ -53,16 +61,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} dark`}
+      className={`${inter.variable} ${outfit.variable} ${fraunces.variable} dark`}
       data-theme="dark"
       suppressHydrationWarning
     >
       <body className="font-[var(--font-inter)] antialiased">
-        <ToastProvider>
-          {children}
-          <KeyboardShortcutsModal />
-          <PwaRegister />
-        </ToastProvider>
+        <AccessibilityProvider>
+          <I18nProvider>
+            <ToastProvider>
+              {children}
+              <KeyboardShortcutsModal />
+              <PwaRegister />
+            </ToastProvider>
+          </I18nProvider>
+        </AccessibilityProvider>
       </body>
     </html>
   );

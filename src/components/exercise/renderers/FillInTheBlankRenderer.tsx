@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { HelpCircle, Check, X } from "lucide-react";
 import { FillInTheBlankExercise } from "@/types/exercise.types";
+import { UmlautKeyboardBar } from "@/components/ui/UmlautKeyboardBar";
 
 interface FillInTheBlankRendererProps {
   exercise: FillInTheBlankExercise;
@@ -119,15 +120,22 @@ export function FillInTheBlankRenderer({
 
       {/* Manual text input fallback if no word bank or user prefers typing */}
       {(!exercise.wordBank || exercise.wordBank.length === 0) && (
-        <div className="max-w-xs mx-auto">
+        <div className="max-w-md mx-auto space-y-3">
           <input
             type="text"
             disabled={disabled || isSubmitted}
             value={userAnswer}
             onChange={(e) => onAnswerChange(e.target.value)}
             placeholder="Type missing word..."
+            aria-label="Missing German word"
             className="w-full px-4 py-2.5 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] text-center text-lg font-medium text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-brand-500)] shadow-sm"
           />
+          {!isSubmitted && (
+            <UmlautKeyboardBar
+              onInsert={(char) => onAnswerChange(userAnswer + char)}
+              disabled={disabled}
+            />
+          )}
         </div>
       )}
     </div>

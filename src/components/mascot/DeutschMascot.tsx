@@ -6,13 +6,15 @@ import { Sparkles, HelpCircle, ThumbsUp, PartyPopper } from "lucide-react";
 import { playClickSound, triggerHaptic } from "@/lib/soundEffects";
 
 export type MascotState =
-  | "idle"
   | "happy"
-  | "celebrating"
   | "thinking"
+  | "celebrating"
   | "encouraging"
+  | "sleepy"
+  | "surprised"
+  | "idle"
   | "oops"
-  | "sleeping";
+  | "sleeping"; // alias for sleepy
 
 export interface DeutschMascotProps {
   state?: MascotState;
@@ -43,6 +45,9 @@ export function DeutschMascot({
 }: DeutschMascotProps) {
   const [isWiggling, setIsWiggling] = useState(false);
   const dims = SIZE_MAP[size];
+
+  const isSleepy = state === "sleepy" || state === "sleeping";
+  const isSurprised = state === "surprised";
 
   const handleMascotClick = () => {
     if (!interactive) return;
@@ -90,6 +95,8 @@ export function DeutschMascot({
             ? { y: [0, -8, 0], rotate: [-2, 2, -2] }
             : state === "happy"
             ? { y: [0, -5, 0] }
+            : isSurprised
+            ? { scale: [1, 1.06, 1], y: [0, -6, 0] }
             : { y: [0, -2, 0] }
         }
         transition={
@@ -99,14 +106,16 @@ export function DeutschMascot({
             ? { repeat: Infinity, duration: 1.2, ease: "easeInOut" }
             : state === "happy"
             ? { repeat: Infinity, duration: 1.6, ease: "easeInOut" }
+            : isSurprised
+            ? { repeat: Infinity, duration: 2.2, ease: "easeInOut" }
             : { repeat: Infinity, duration: 3.5, ease: "easeInOut" }
         }
         onClick={handleMascotClick}
         className={`relative ${interactive ? "cursor-pointer" : ""}`}
         style={{ width: dims.width, height: dims.height }}
       >
-        {/* Glow halo for celebrating / encouraging */}
-        {(state === "celebrating" || state === "happy") && (
+        {/* Glow halo for celebrating / encouraging / surprised */}
+        {(state === "celebrating" || state === "happy" || isSurprised) && (
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--color-brand-500)]/25 to-[var(--color-accent-500)]/25 blur-xl -z-10" />
         )}
 
@@ -140,13 +149,19 @@ export function DeutschMascot({
 
           {/* Floppy Left Ear */}
           <motion.path
-            d="M 44 48 C 24 50 14 74 20 100 C 24 116 38 120 46 108 C 52 98 52 64 44 48 Z"
+            d={
+              isSurprised
+                ? "M 44 44 C 20 40 10 64 16 90 C 22 106 36 112 44 100 C 50 90 52 58 44 44 Z"
+                : "M 44 48 C 24 50 14 74 20 100 C 24 116 38 120 46 108 C 52 98 52 64 44 48 Z"
+            }
             fill="url(#earDark)"
             animate={
               state === "celebrating"
                 ? { rotate: [0, -12, 0] }
                 : state === "happy"
                 ? { rotate: [0, -6, 0] }
+                : isSurprised
+                ? { rotate: [0, -8, 0] }
                 : undefined
             }
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
@@ -155,13 +170,19 @@ export function DeutschMascot({
 
           {/* Floppy Right Ear */}
           <motion.path
-            d="M 116 48 C 136 50 146 74 140 100 C 136 116 122 120 114 108 C 108 98 108 64 116 48 Z"
+            d={
+              isSurprised
+                ? "M 116 44 C 140 40 150 64 144 90 C 138 106 124 112 116 100 C 110 90 108 58 116 44 Z"
+                : "M 116 48 C 136 50 146 74 140 100 C 136 116 122 120 114 108 C 108 98 108 64 116 48 Z"
+            }
             fill="url(#earDark)"
             animate={
               state === "celebrating"
                 ? { rotate: [0, 12, 0] }
                 : state === "happy"
                 ? { rotate: [0, 6, 0] }
+                : isSurprised
+                ? { rotate: [0, 8, 0] }
                 : undefined
             }
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
@@ -204,6 +225,12 @@ export function DeutschMascot({
                 fill="#EF4444"
               />
             </g>
+          ) : isSurprised ? (
+            /* Wide Open Astonished 'O' Mouth */
+            <g>
+              <ellipse cx="80" cy="107" rx="6.5" ry="8" fill="#BE123C" stroke="#1E1E1E" strokeWidth="2.2" />
+              <ellipse cx="80" cy="111" rx="4" ry="2.5" fill="#EF4444" />
+            </g>
           ) : state === "oops" ? (
             /* Wobbly sympathetic small 'o' mouth */
             <ellipse cx="80" cy="106" rx="3.5" ry="4" fill="#374151" />
@@ -216,7 +243,7 @@ export function DeutschMascot({
               strokeLinecap="round"
               fill="none"
             />
-          ) : state === "sleeping" ? (
+          ) : isSleepy ? (
             /* Gentle peaceful straight line */
             <path
               d="M 75 104 Q 80 106 85 104"
@@ -241,7 +268,7 @@ export function DeutschMascot({
           <ellipse cx="100" cy="100" rx="6" ry="3.5" fill="#F87171" opacity="0.45" />
 
           {/* Eyes expressions */}
-          {state === "sleeping" ? (
+          {isSleepy ? (
             /* Sleeping closed curved eye arcs */
             <g stroke="#1E1E1E" strokeWidth="3" strokeLinecap="round" fill="none">
               <path d="M 60 76 Q 66 82 72 76" />
@@ -252,6 +279,21 @@ export function DeutschMascot({
             <g stroke="#1E1E1E" strokeWidth="3.2" strokeLinecap="round" fill="none">
               <path d="M 59 78 Q 66 70 73 78" />
               <path d="M 87 78 Q 94 70 101 78" />
+            </g>
+          ) : isSurprised ? (
+            /* Wide Astonished Big Eyes */
+            <g>
+              <ellipse cx="66" cy="74" rx="8.5" ry="10" fill="#1E1E1E" />
+              <circle cx="64" cy="70" r="3.8" fill="#FFFFFF" />
+              <circle cx="68" cy="76" r="1.8" fill="#FFFFFF" />
+
+              <ellipse cx="94" cy="74" rx="8.5" ry="10" fill="#1E1E1E" />
+              <circle cx="92" cy="70" r="3.8" fill="#FFFFFF" />
+              <circle cx="96" cy="76" r="1.8" fill="#FFFFFF" />
+
+              {/* Raised Eyebrows */}
+              <path d="M 58 61 Q 66 56 74 61" stroke="#1E1E1E" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+              <path d="M 86 61 Q 94 56 102 61" stroke="#1E1E1E" strokeWidth="2.5" strokeLinecap="round" fill="none" />
             </g>
           ) : state === "thinking" ? (
             /* Looking up & to the right */
@@ -310,10 +352,20 @@ export function DeutschMascot({
               <path d="M 136 21 L 140 21 M 138 18 L 138 25" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
             </g>
           )}
+
+          {isSurprised && (
+            /* Exclamation Sparks */
+            <g>
+              <path d="M 28 36 L 24 24" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+              <path d="M 38 30 L 38 16" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+              <path d="M 122 30 L 122 16" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+              <path d="M 132 36 L 136 24" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+            </g>
+          )}
         </svg>
 
         {/* Floating sleeping Zzz's */}
-        {state === "sleeping" && (
+        {isSleepy && (
           <motion.div
             initial={{ opacity: 0, y: 0 }}
             animate={{ opacity: [0, 1, 0], y: [-4, -20], x: [0, 8] }}

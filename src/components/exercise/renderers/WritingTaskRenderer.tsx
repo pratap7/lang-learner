@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Check, Edit3, Sparkles, BookOpen } from "lucide-react";
 import { WritingTaskExercise } from "@/types/exercise.types";
 import { playClickSound } from "@/lib/soundEffects";
+import { UmlautKeyboardBar } from "@/components/ui/UmlautKeyboardBar";
 
 interface WritingTaskRendererProps {
   exercise: WritingTaskExercise;
@@ -14,8 +15,6 @@ interface WritingTaskRendererProps {
   isCorrect: boolean | null;
   disabled?: boolean;
 }
-
-const GERMAN_SPECIAL_CHARS = ["ä", "ö", "ü", "ß", "Ä", "Ö", "Ü"];
 
 export function WritingTaskRenderer({
   exercise,
@@ -114,6 +113,7 @@ export function WritingTaskRenderer({
             value={userAnswer}
             onChange={(e) => onAnswerChange(e.target.value)}
             rows={5}
+            aria-label="German writing task response"
             placeholder="Schreibe deinen Text hier auf Deutsch..."
             className={`w-full p-4 rounded-[var(--radius-xl)] border text-base font-medium resize-none transition-all shadow-sm focus:outline-none ${
               isSubmitted && isCorrect
@@ -135,24 +135,10 @@ export function WritingTaskRenderer({
 
         {/* German Special Characters Toolbar */}
         {!isSubmitted && (
-          <div className="flex flex-wrap items-center justify-between gap-2 p-2 rounded-[var(--radius-lg)] bg-[var(--color-surface-2)] border border-[var(--color-border)]">
-            <span className="text-xs text-[var(--color-text-muted)] font-medium pl-1">
-              German Letters:
-            </span>
-            <div className="flex items-center gap-1.5">
-              {GERMAN_SPECIAL_CHARS.map((char) => (
-                <button
-                  key={char}
-                  type="button"
-                  disabled={disabled}
-                  onClick={() => insertChar(char)}
-                  className="w-7 h-7 rounded-md bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-brand-500)] text-xs font-bold font-mono text-[var(--color-text-primary)] transition-all cursor-pointer active:scale-95"
-                >
-                  {char}
-                </button>
-              ))}
-            </div>
-          </div>
+          <UmlautKeyboardBar
+            onInsert={insertChar}
+            disabled={disabled}
+          />
         )}
       </div>
 

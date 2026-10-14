@@ -540,25 +540,25 @@ export function WritingStudio() {
                         key={char}
                         type="button"
                         onClick={() => insertCharacter(char)}
-                        className="w-7 h-7 rounded-[var(--radius-md)] bg-[var(--color-surface-2)] hover:bg-[var(--color-brand-500)]/20 border border-[var(--color-border)] font-mono text-xs font-bold text-[var(--color-text-primary)] flex items-center justify-center transition-colors"
+                        className="min-w-[38px] min-h-[38px] w-9 h-9 sm:w-10 sm:h-10 rounded-[var(--radius-md)] bg-[var(--color-surface-2)] hover:bg-[var(--color-brand-500)]/20 active:scale-95 border border-[var(--color-border)] font-mono text-sm font-bold text-[var(--color-text-primary)] flex items-center justify-center transition-all"
                       >
                         {char}
                       </button>
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-3 text-xs">
+                  <div className="flex items-center gap-2 text-xs">
                     <button
                       type="button"
                       onClick={() => insertCharacter(activeTask.sampleOpening + "\n\n")}
-                      className="text-[11px] font-semibold text-[var(--color-brand-400)] hover:underline"
+                      className="min-h-[38px] px-2.5 py-1 rounded-[var(--radius-md)] text-[12px] font-semibold text-[var(--color-brand-400)] hover:text-[var(--color-brand-300)] bg-[var(--color-surface-2)]/60 hover:bg-[var(--color-surface-2)] border border-[var(--color-border)]/50 transition-colors flex items-center"
                     >
                       + Salutation
                     </button>
                     <button
                       type="button"
                       onClick={() => insertCharacter("\n\n" + activeTask.sampleSignOff)}
-                      className="text-[11px] font-semibold text-[var(--color-brand-400)] hover:underline"
+                      className="min-h-[38px] px-2.5 py-1 rounded-[var(--radius-md)] text-[12px] font-semibold text-[var(--color-brand-400)] hover:text-[var(--color-brand-300)] bg-[var(--color-surface-2)]/60 hover:bg-[var(--color-surface-2)] border border-[var(--color-border)]/50 transition-colors flex items-center"
                     >
                       + Sign-off
                     </button>

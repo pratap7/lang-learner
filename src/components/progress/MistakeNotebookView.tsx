@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { useToast } from "@/components/ui/Toast";
 import {
   EnrichedMistakeRecord,
@@ -338,17 +339,17 @@ export function MistakeNotebookView({ initialTopicFilter }: MistakeNotebookViewP
           })}
 
           {filteredList.length === 0 && (
-            <div className="p-10 text-center rounded-[var(--radius-xl)] bg-[var(--color-surface-2)]/40 border border-[var(--color-border)] space-y-3">
-              <ShieldCheck size={32} className="text-[var(--color-success)] mx-auto" />
-              <p className="text-sm font-bold text-[var(--color-text-primary)]">
-                No mistakes found for this filter!
-              </p>
-              <p className="text-xs text-[var(--color-text-muted)] max-w-sm mx-auto">
-                {statusFilter === "unresolved"
+            <EmptyState
+              icon={ShieldCheck}
+              title="No Mistakes in this Category"
+              description={
+                statusFilter === "unresolved"
                   ? "All mistakes in this category have been resolved. Excellent grammatical accuracy!"
-                  : "Try clearing filters to view all recorded errors."}
-              </p>
-            </div>
+                  : "No recorded errors matching this filter. Continue practicing to log new areas for review."
+              }
+              actionLabel="Practice Flashcards"
+              actionHref="/flashcards"
+            />
           )}
         </div>
       </div>

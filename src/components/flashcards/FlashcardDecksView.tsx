@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { FlashcardDeckSkeleton } from "@/components/ui/Skeleton";
 import { getDecks, FlashcardDeck } from "@/lib/flashcardService";
 import { FlashcardPlayer } from "./FlashcardPlayer";
 import { getDueCardsForDeck, getCardsForDeck } from "@/lib/flashcardService";
@@ -134,7 +136,16 @@ export function FlashcardDecksView() {
           Curriculum Unit Decks (A1 Beginner)
         </h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+        {decks.length === 0 ? (
+          <EmptyState
+            icon={Layers}
+            title="No Vocabulary Decks Found"
+            description="Start any A1 lesson or save words to your vocabulary notebook to populate your spaced repetition decks."
+            actionLabel="Explore Courses"
+            actionHref="/courses"
+          />
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {decks
             .filter((d) => d.id !== "my-words")
             .map((deck) => {
@@ -191,7 +202,8 @@ export function FlashcardDecksView() {
                 </div>
               );
             })}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

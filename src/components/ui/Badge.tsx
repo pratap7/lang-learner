@@ -13,6 +13,7 @@ const badgeVariants = cva(
         default:   "bg-[var(--color-surface-2)] text-[var(--color-text-secondary)] border-[var(--color-border)]",
         secondary: "bg-[var(--color-surface-2)] text-[var(--color-text-secondary)] border-[var(--color-border)]",
         primary:   "bg-[var(--color-brand-500)]/15 text-[var(--color-brand-400)] border-[var(--color-brand-500)]/30",
+        brand:     "bg-[var(--color-brand-500)]/15 text-[var(--color-brand-400)] border-[var(--color-brand-500)]/30",
         accent:    "bg-[var(--color-accent-500)]/15 text-[var(--color-accent-400)] border-[var(--color-accent-500)]/30",
         success:   "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
         warning:   "bg-amber-500/15 text-amber-400 border-amber-500/30",

@@ -186,10 +186,11 @@ export function purchaseFreezeWithXp(xpCost: number = 100): { success: boolean; 
   }
 
   if (currentXp < xpCost) {
+    const needed = xpCost - currentXp;
     return {
       success: false,
       data: current,
-      message: `Not enough XP. You need ${xpCost} XP but have ${currentXp} XP.`,
+      message: `You need ${needed} more XP to equip a Streak Shield (you have ${currentXp}/${xpCost} XP). Complete a quick lesson to earn the remaining balance.`,
     };
   }
 
@@ -209,7 +210,7 @@ export function purchaseFreezeWithXp(xpCost: number = 100): { success: boolean; 
   return {
     success: true,
     data: updated,
-    message: "Streak Freeze shield equipped! Your streak is protected for 24 hours.",
+    message: "Streak Shield equipped! Your daily study momentum is safely protected.",
   };
 }
 

@@ -14,6 +14,7 @@ import {
   cancelSubscription,
   CancellationSurveyRecord,
 } from "@/lib/billingService";
+import { appCopy } from "@/lib/appCopy";
 import { playSuccessChime, triggerHaptic } from "@/lib/soundEffects";
 import { fireConfetti } from "@/lib/confetti";
 
@@ -124,19 +125,16 @@ export function CancellationSurveyModal({
           <div className="space-y-5">
             <div className="flex items-center gap-3">
               <DeutschMascot
-                state="oops"
+                state="idle"
                 size="sm"
-                speechBubble={{
-                  de: "Wir werden dich vermissen!",
-                  en: "We will miss you!",
-                }}
+                speechBubble={appCopy.cancellation.mascotThought}
               />
               <div>
                 <h2 className="font-heading text-xl font-bold text-[var(--color-text-primary)]">
-                  Cancel Subscription
+                  {appCopy.cancellation.title}
                 </h2>
                 <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-                  Before you go, please help us understand why you are cancelling.
+                  {appCopy.cancellation.subtitle}
                 </p>
               </div>
             </div>
@@ -205,29 +203,26 @@ export function CancellationSurveyModal({
                 <DeutschMascot
                   state="encouraging"
                   size="md"
-                  speechBubble={{
-                    de: "Warte! Wir haben ein Geschenk für dich.",
-                    en: "Wait! We have a special gift for you.",
-                  }}
+                  speechBubble={appCopy.cancellation.mascotThought}
                 />
               </div>
 
               {selectedReason === "time" ? (
                 <>
                   <h2 className="font-heading text-xl sm:text-2xl font-bold text-[var(--color-text-primary)]">
-                    Take a Break Instead of Cancelling!
+                    {appCopy.cancellation.pauseOption.headline}
                   </h2>
                   <p className="text-xs sm:text-sm text-[var(--color-text-secondary)] mt-1.5 max-w-sm mx-auto">
-                    Life gets busy. Pause your subscription for <strong>1 month for free</strong>. We will freeze your streak, preserve your saved flashcards, and you won&apos;t be billed.
+                    {appCopy.cancellation.pauseOption.description}
                   </p>
                 </>
               ) : (
                 <>
                   <h2 className="font-heading text-xl sm:text-2xl font-bold text-[var(--color-text-primary)]">
-                    Keep Learning with 50% OFF!
+                    {appCopy.cancellation.discountOption.headline}
                   </h2>
                   <p className="text-xs sm:text-sm text-[var(--color-text-secondary)] mt-1.5 max-w-sm mx-auto">
-                    We want you to reach German fluency. Claim a <strong>50% discount for the next 3 months</strong> and keep full access to AI conversations and Goethe mock exams.
+                    {appCopy.cancellation.discountOption.description}
                   </p>
                 </>
               )}
@@ -237,12 +232,14 @@ export function CancellationSurveyModal({
             <div className="p-4 rounded-[var(--radius-xl)] border border-[var(--color-accent-500)]/40 bg-[var(--color-accent-500)]/10 text-center space-y-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-accent-500)]/20 text-[var(--color-accent-400)] text-xs font-bold">
                 <Sparkles size={14} />
-                {selectedReason === "time" ? "1-Month Free Pause" : "Exclusive 50% Win-Back Discount"}
+                {selectedReason === "time"
+                  ? appCopy.cancellation.pauseOption.badge
+                  : appCopy.cancellation.discountOption.badge}
               </div>
               <p className="text-xs text-[var(--color-text-primary)] font-medium">
                 {selectedReason === "time"
-                  ? "Your account freezes until next month. Resume anytime with 1 click."
-                  : "Enjoy all Pro benefits at half the price for the next 90 days."}
+                  ? appCopy.cancellation.pauseOption.summary
+                  : appCopy.cancellation.discountOption.summary}
               </p>
             </div>
 
@@ -260,8 +257,8 @@ export function CancellationSurveyModal({
                 className="shadow-[var(--shadow-glow)] font-bold text-sm"
               >
                 {selectedReason === "time"
-                  ? "Pause Subscription for 1 Month (Free)"
-                  : "Claim 50% Off & Stay Learning"}
+                  ? appCopy.cancellation.pauseOption.action
+                  : appCopy.cancellation.discountOption.action}
               </Button>
 
               <Button
@@ -272,7 +269,7 @@ export function CancellationSurveyModal({
                 onClick={handleDeclineAndCancel}
                 className="text-[var(--color-danger)] hover:bg-[var(--color-danger)]/10 text-xs"
               >
-                No thanks, cancel my subscription at period end
+                {appCopy.cancellation.confirmCancel}
               </Button>
             </div>
           </div>

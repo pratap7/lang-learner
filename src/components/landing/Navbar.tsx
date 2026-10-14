@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Menu, X, Moon, Sun, Zap, User, Sparkles } from "lucide-react";
+import { BookOpen, Menu, X, Moon, Sun, Zap, User, Sparkles, Sliders } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { AudioToggle } from "@/components/ui/AudioToggle";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { AccessibilitySettingsModal } from "@/components/ui/AccessibilitySettingsModal";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -23,6 +25,7 @@ const navLinks = [
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "Progress", href: "/progress" },
   { label: "Goals", href: "/goals" },
+  { label: "Design System", href: "/design-system" },
 ];
 
 export function Navbar() {
@@ -30,6 +33,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showA11yModal, setShowA11yModal] = useState(false);
 
   useEffect(() => {
     try {
@@ -87,8 +91,8 @@ export function Navbar() {
             : "bg-transparent"
         )}
       >
-        {/* Subtle German flag tricolor bar at the top */}
-        <div className="h-0.5 w-full tricolor-stripe opacity-90" />
+        {/* Brand gradient bar at the top */}
+        <div className="h-0.5 w-full bg-gradient-to-r from-[var(--color-brand-600)] via-[var(--color-brand-500)] to-[var(--color-accent-500)] opacity-90" />
 
         <div className="container-xl flex items-center justify-between h-16">
           {/* Logo */}
@@ -99,50 +103,102 @@ export function Navbar() {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-heading text-lg font-bold text-[var(--color-text-primary)] leading-none">
+              <span className="font-heading text-lg font-bold text-[var(--color-text-primary)] leading-none tracking-tight">
                 Deutsch<span className="text-[var(--color-brand-400)]">Pfad</span>
               </span>
               <span className="text-[9px] font-semibold uppercase tracking-widest text-[var(--color-accent-500)] mt-0.5">
-                A1 · C2 Fluency
+                CEFR A1–C2 Standard
               </span>
             </div>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-[var(--color-surface-2)]/50 border border-[var(--color-border)]/60 backdrop-blur-md">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
-              >
-                {link.label}
-              </a>
-            ))}
+          <nav className="hidden lg:flex items-center gap-1 p-1 rounded-full bg-[var(--color-surface-2)]/60 border border-[var(--color-border)]/70 backdrop-blur-md shadow-sm">
+            <a
+              href="#demo"
+              className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
+            >
+              Demo
+            </a>
+            <a
+              href="#comparison"
+              className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
+            >
+              Why Deutsch Pfad
+            </a>
+            <a
+              href="#features"
+              className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
+            >
+              Features
+            </a>
+            <a
+              href="#journey"
+              className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
+            >
+              A1–C2 Road
+            </a>
+            <a
+              href="#pathways"
+              className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
+            >
+              Pathways
+            </a>
+            <a
+              href="#ai-tutor"
+              className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
+            >
+              AI Tutor
+            </a>
+            <a
+              href="#pricing"
+              className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
+            >
+              Pricing
+            </a>
+            <a
+              href="#faq"
+              className="px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-surface)] transition-all duration-150"
+            >
+              FAQ
+            </a>
           </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-2">
+            <div className="hidden sm:block">
+              <LanguageSwitcher variant="pill" />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowA11yModal(true)}
+              aria-label="Accessibility & Display settings"
+              className="h-9 w-9 flex items-center justify-center rounded-[var(--radius-lg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)] border border-transparent hover:border-[var(--color-border)] transition-all duration-150 cursor-pointer"
+            >
+              <Sliders size={16} />
+            </button>
+
             <AudioToggle />
 
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="h-9 w-9 flex items-center justify-center rounded-[var(--radius-lg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)] border border-transparent hover:border-[var(--color-border)] transition-all duration-150"
+              className="h-9 w-9 flex items-center justify-center rounded-[var(--radius-lg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)] border border-transparent hover:border-[var(--color-border)] transition-all duration-150 cursor-pointer"
             >
               {darkMode ? <Sun size={16} className="text-[var(--color-accent-400)]" /> : <Moon size={16} />}
             </button>
 
             {isLoggedIn ? (
-              <Link href="/profile">
-                <Button variant="outline" size="sm" leftIcon={<User size={14} className="text-[var(--color-brand-400)]" />}>
-                  My Profile
+              <Link href="/dashboard">
+                <Button variant="primary" size="sm" className="hidden sm:inline-flex">
+                  Go to Dashboard
                 </Button>
               </Link>
             ) : (
               <>
-                <Link href="/auth/login">
-                  <Button variant="ghost" size="sm" className="hidden md:inline-flex">
+                <Link href="/auth/login" className="hidden sm:inline-flex">
+                  <Button variant="ghost" size="sm">
                     Sign in
                   </Button>
                 </Link>
@@ -192,6 +248,23 @@ export function Navbar() {
                 </a>
               ))}
               <div className="border-t border-[var(--color-border)] my-2 pt-3 flex flex-col gap-2">
+                <div className="flex items-center justify-between py-1">
+                  <span className="text-xs font-semibold text-[var(--color-text-secondary)]">Language & Display</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setShowA11yModal(true);
+                    }}
+                    className="text-xs text-[var(--color-brand-400)] font-semibold flex items-center gap-1 cursor-pointer"
+                  >
+                    <Sliders size={13} /> Settings
+                  </button>
+                </div>
+                <div className="py-1">
+                  <LanguageSwitcher variant="pill" className="w-full" />
+                </div>
+
                 {isLoggedIn ? (
                   <Link href="/profile" onClick={() => setMobileOpen(false)}>
                     <Button variant="primary" size="md" className="w-full" leftIcon={<User size={15} />}>
@@ -213,6 +286,12 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Accessibility & Display Settings Modal */}
+      <AccessibilitySettingsModal
+        isOpen={showA11yModal}
+        onClose={() => setShowA11yModal(false)}
+      />
     </>
   );
 }

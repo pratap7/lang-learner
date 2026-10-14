@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="60" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Ambient Glow Orbs -->
+  <circle cx="200" cy="180" r="240" fill="#6366f1" opacity="0.18" filter="url(#glow)" />
+  <circle cx="1000" cy="450" r="280" fill="#f59e0b" opacity="0.12" filter="url(#glow)" />
+  <circle cx="700" cy="150" r="220" fill="#3b82f6" opacity="0.15" filter="url(#glow)" />
+
+  <!-- Top Accent Bar -->
+  <rect x="0" y="0" width="1200" height="6" fill="url(#brandGrad)" />
+
+  <!-- Badge Pill -->
+  <rect x="100" y="90" width="280" height="42" rx="21" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+  <circle cx="124" cy="111" r="5" fill="#10b981" />
+  <text x="142" y="116" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0" letter-spacing="0.5">CEFR A1–C2 STANDARD</text>
+
+  <!-- Title -->
+  <text x="100" y="210" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="64" font-weight="800" fill="#ffffff" letter-spacing="-1.5">
+    Deutsch<tspan fill="#818cf8">Pfad</tspan>
+  </text>
+  <text x="100" y="280" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="44" font-weight="700" fill="#cbd5e1" letter-spacing="-0.5">
+    Master German with Clinical CEFR Rigor
+  </text>
+
+  <!-- Subtitle -->
+  <text x="100" y="340" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="400" fill="#94a3b8">
+    Color-coded grammar cases · SM-2 spaced repetition · Goethe-Institut writing rubrics
+  </text>
+
+  <!-- Feature Pills -->
+  <g transform="translate(100, 420)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="220" height="70" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="24" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#60a5fa">4-CASE ARCHITECTURE</text>
+    <text x="24" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">Nominativ to Genitiv</text>
+
+    <!-- Pill 2 -->
+    <rect x="240" y="0" width="220" height="70" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="264" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#34d399">SM-2 FLASHCARDS</text>
+    <text x="264" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">Long-term memory decay</text>
+
+    <!-- Pill 3 -->
+    <rect x="480" y="0" width="240" height="70" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="504" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#fbbf24">GOETHE WRITING RUBRIC</text>
+    <text x="504" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">0-20 score evaluation</text>
+
+    <!-- Pill 4 -->
+    <rect x="740" y="0" width="230" height="70" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="764" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#a78bfa">ZERO HALLUCINATIONS</text>
+    <text x="764" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">Strict linguistic corpus</text>
+  </g>
+
+  <!-- Footer Watermark -->
+  <text x="100" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#64748b">
+    deutschpfad.app · Council of Europe CEFR Framework Aligned
+  </text>
+</svg>

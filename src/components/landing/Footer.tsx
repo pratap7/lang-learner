@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Mail } from "lucide-react";
+import { BookOpen, Mail, ShieldCheck, Globe } from "lucide-react";
 
 function TwitterIcon({ size = 15 }: { size?: number }) {
   return (
@@ -25,30 +25,35 @@ function LinkedinIcon({ size = 15 }: { size?: number }) {
   );
 }
 
-const footerLinks = {
-  Learn: [
-    { label: "Courses",       href: "#" },
-    { label: "Placement Test",href: "#" },
-    { label: "Flashcards",    href: "#" },
-    { label: "Mock Tests",    href: "#" },
-    { label: "Grammar Guide", href: "#" },
+const footerNavigation = {
+  Product: [
+    { label: "CEFR Courses (A1–C2)", href: "/courses" },
+    { label: "Diagnostic Placement Test", href: "/tests/placement" },
+    { label: "SM-2 Flashcard Decks", href: "/flashcards" },
+    { label: "AI Writing Studio", href: "/writing" },
+    { label: "Bilingual Stories", href: "/stories" },
+    { label: "Pricing & Plans", href: "/pricing" },
+  ],
+  Pathways: [
+    { label: "German Tech & Workplace", href: "/courses" },
+    { label: "University & TestDaF Prep", href: "/courses" },
+    { label: "Medical Licensure (FSP)", href: "/courses" },
+    { label: "Citizenship & DTZ Exam", href: "/tests" },
+    { label: "Everyday Travel & Culture", href: "/stories" },
+  ],
+  Compliance: [
+    { label: "Impressum (Legal Notice)", href: "/settings" },
+    { label: "Datenschutzerklärung (Privacy)", href: "/settings" },
+    { label: "AGB (Terms of Service)", href: "/settings" },
+    { label: "Widerrufsbelehrung (Refunds)", href: "/settings/billing" },
+    { label: "Cookie-Einstellungen", href: "/settings" },
   ],
   Company: [
-    { label: "About",    href: "#" },
-    { label: "Blog",     href: "#" },
-    { label: "Careers",  href: "#" },
-    { label: "Press",    href: "#" },
-  ],
-  Support: [
-    { label: "Help Centre",    href: "#" },
-    { label: "Community",      href: "#" },
-    { label: "Contact Us",     href: "#" },
-    { label: "Status Page",    href: "#" },
-  ],
-  Legal: [
-    { label: "Privacy Policy",  href: "#" },
-    { label: "Terms of Service",href: "#" },
-    { label: "Cookie Policy",   href: "#" },
+    { label: "CEFR Framework Standards", href: "/design-system" },
+    { label: "Design System Specification", href: "/design-system" },
+    { label: "Curriculum Methodology", href: "#ai-tutor" },
+    { label: "System Status", href: "/dashboard" },
+    { label: "Contact Support", href: "mailto:support@deutschpfad.app" },
   ],
 };
 
@@ -56,59 +61,75 @@ const socials = [
   { icon: TwitterIcon,  href: "#", label: "Twitter" },
   { icon: GithubIcon,   href: "#", label: "GitHub"  },
   { icon: LinkedinIcon, href: "#", label: "LinkedIn"},
-  { icon: Mail,         href: "#", label: "Email"   },
+  { icon: Mail,         href: "mailto:support@deutschpfad.app", label: "Email Support" },
 ];
 
 export function Footer() {
   return (
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-surface)] relative">
-      <div className="h-0.5 w-full tricolor-stripe opacity-75" />
+      {/* Brand accent gradient bar */}
+      <div className="h-0.5 w-full bg-gradient-to-r from-[var(--color-brand-600)] via-[var(--color-brand-500)] to-[var(--color-accent-500)] opacity-80" />
+
       <div className="container-xl py-16">
-        {/* Top */}
+        {/* Top Grid */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
-          {/* Brand */}
+          {/* Brand Info */}
           <div className="col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-[var(--radius-lg)] bg-gradient-to-br from-[var(--color-brand-500)] to-[var(--color-brand-700)] flex items-center justify-center shadow-md">
-                <BookOpen size={16} className="text-white" />
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group">
+              <div className="w-9 h-9 rounded-[var(--radius-lg)] bg-gradient-to-br from-[var(--color-brand-500)] via-[var(--color-brand-600)] to-[var(--color-accent-500)] p-[1.5px] shadow-md">
+                <div className="w-full h-full bg-[var(--color-surface)] rounded-[calc(var(--radius-lg)-1.5px)] flex items-center justify-center">
+                  <BookOpen size={16} className="text-[var(--color-brand-400)]" />
+                </div>
               </div>
-              <span className="font-heading text-lg font-semibold text-[var(--color-text-primary)]">
-                Deutsch<span className="text-[var(--color-brand-500)]">Pfad</span>
-              </span>
+              <div className="flex flex-col">
+                <span className="font-heading text-lg font-bold text-[var(--color-text-primary)] leading-none">
+                  Deutsch<span className="text-[var(--color-brand-400)]">Pfad</span>
+                </span>
+                <span className="text-[9px] font-semibold uppercase tracking-widest text-[var(--color-accent-500)] mt-0.5">
+                  CEFR A1–C2 Standard
+                </span>
+              </div>
             </Link>
-            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-5 max-w-xs">
-              Your structured, science-backed path to German fluency — from A1 beginner to C2 master.
+
+            <p className="text-xs sm:text-sm text-[var(--color-text-secondary)] leading-relaxed mb-6 max-w-sm">
+              The clinical, science-backed learning platform for English speakers mastering German. Aligned strictly with Goethe-Institut, telc, and CEFR standards.
             </p>
-            {/* Socials */}
-            <div className="flex gap-2">
+
+            {/* Social Links */}
+            <div className="flex items-center gap-2 mb-4">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-brand-400)] hover:text-[var(--color-brand-400)] transition-all duration-150"
+                  className="w-9 h-9 flex items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-brand-400)] hover:text-[var(--color-brand-400)] bg-[var(--color-surface-2)]/40 transition-all duration-150"
                 >
-                  <Icon size={15} />
+                  <Icon size={14} />
                 </a>
               ))}
             </div>
+
+            <div className="inline-flex items-center gap-1.5 text-[11px] text-[var(--color-text-muted)]">
+              <ShieldCheck size={14} className="text-emerald-400" />
+              <span>EU DSGVO / GDPR Compliant Data Hosting</span>
+            </div>
           </div>
 
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([section, links]) => (
+          {/* Navigation Columns */}
+          {Object.entries(footerNavigation).map(([section, links]) => (
             <div key={section}>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)] mb-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-4">
                 {section}
               </p>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <a
+                    <Link
                       href={link.href}
-                      className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
+                      className="text-xs sm:text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -116,15 +137,25 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-[var(--color-border)] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[var(--color-text-muted)]">
-            © 2026 DeutschPfad. All rights reserved.
-          </p>
-          <div className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
-            <span>Made with</span>
-            <span className="text-[var(--color-error)]">♥</span>
-            <span>for German learners worldwide</span>
+        {/* Bottom Legal / German Compliance Bar */}
+        <div className="border-t border-[var(--color-border)] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--color-text-muted)]">
+          <p>© 2026 DeutschPfad EdTech GmbH. All rights reserved.</p>
+          <div className="flex items-center gap-4 flex-wrap">
+            <Link href="/settings" className="hover:text-[var(--color-text-primary)] transition-colors">
+              Impressum (Legal Notice)
+            </Link>
+            <span>·</span>
+            <Link href="/settings" className="hover:text-[var(--color-text-primary)] transition-colors">
+              Datenschutz (Privacy)
+            </Link>
+            <span>·</span>
+            <Link href="/settings" className="hover:text-[var(--color-text-primary)] transition-colors">
+              AGB (Terms)
+            </Link>
+            <span>·</span>
+            <Link href="/settings/billing" className="hover:text-[var(--color-text-primary)] transition-colors">
+              Widerruf (Cancellation)
+            </Link>
           </div>
         </div>
       </div>

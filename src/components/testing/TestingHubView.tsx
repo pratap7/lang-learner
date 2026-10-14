@@ -20,6 +20,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { EmptyState } from "@/components/ui/EmptyState";
 import {
   UNIT_QUIZZES,
   MOCK_EXAMS,
@@ -398,9 +399,13 @@ export function TestingHubView() {
               ))}
             </div>
           ) : (
-            <div className="p-8 text-center text-xs text-[var(--color-text-muted)] bg-[var(--color-surface-2)]/40 rounded-xl">
-              No test attempts recorded yet. Take the Adaptive Placement Test or a Unit Quiz to see your score trajectory.
-            </div>
+            <EmptyState
+              icon={Award}
+              title="No Test Attempts Recorded Yet"
+              description="Take the Adaptive Placement Test or complete a CEFR Unit Quiz to track your grammatical progress and score trajectory."
+              actionLabel="Take Placement Test"
+              actionHref="/tests/placement"
+            />
           )}
         </div>
       )}
