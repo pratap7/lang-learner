@@ -622,6 +622,87 @@ export type Database = {
         Update: Record<string, any>;
         Relationships: [];
       };
+      user_notification_preferences: {
+        Row: {
+          user_id: string;
+          email: string | null;
+          weekly_progress: boolean;
+          streak_reminders: boolean;
+          milestone_alerts: boolean;
+          product_updates: boolean;
+          quiet_hours_enabled: boolean;
+          quiet_hours_start: number;
+          quiet_hours_end: number;
+          quiet_hours_timezone: string;
+          unsubscribed_all: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          email?: string | null;
+          weekly_progress?: boolean;
+          streak_reminders?: boolean;
+          milestone_alerts?: boolean;
+          product_updates?: boolean;
+          quiet_hours_enabled?: boolean;
+          quiet_hours_start?: number;
+          quiet_hours_end?: number;
+          quiet_hours_timezone?: string;
+          unsubscribed_all?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          email?: string | null;
+          weekly_progress?: boolean;
+          streak_reminders?: boolean;
+          milestone_alerts?: boolean;
+          product_updates?: boolean;
+          quiet_hours_enabled?: boolean;
+          quiet_hours_start?: number;
+          quiet_hours_end?: number;
+          quiet_hours_timezone?: string;
+          unsubscribed_all?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      notification_dispatch_logs: {
+        Row: {
+          id: string;
+          user_id: string | null;
+          recipient_email: string;
+          template_id: string;
+          subject: string;
+          status: string;
+          provider_message_id: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id?: string | null;
+          recipient_email: string;
+          template_id: string;
+          subject: string;
+          status: string;
+          provider_message_id?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string | null;
+          recipient_email?: string;
+          template_id?: string;
+          subject?: string;
+          status?: string;
+          provider_message_id?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

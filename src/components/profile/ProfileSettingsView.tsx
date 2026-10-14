@@ -649,6 +649,25 @@ export function ProfileSettingsView() {
               </div>
             </div>
 
+            {/* Notifications & Messaging Section */}
+            <div className="pt-6 border-t border-[var(--color-border)]">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <h3 className="font-heading text-sm font-semibold text-[var(--color-text-primary)]">
+                    Notifications & Quiet Hours
+                  </h3>
+                  <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
+                    Customize weekly progress emails, streak reminders, quiet hours, and 1-click unsubscribe rules.
+                  </p>
+                </div>
+                <Link href="/settings/notifications">
+                  <Button variant="outline" size="sm" rightIcon={<ArrowRight size={13} />}>
+                    Notification Studio
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
             {/* Session Management */}
             <div className="pt-6 border-t border-[var(--color-border)]">
               <h3 className="font-heading text-sm font-semibold text-[var(--color-text-primary)] mb-2">

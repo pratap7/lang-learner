@@ -108,3 +108,45 @@ export const GdprAccountDeletionSchema = z.object({
 });
 
 export type GdprAccountDeletionInput = z.infer<typeof GdprAccountDeletionSchema>;
+
+/**
+ * User Notification Preferences Schema
+ */
+export const NotificationPreferencesSchema = z.object({
+  weeklyProgress: z.boolean(),
+  streakReminders: z.boolean(),
+  milestoneAlerts: z.boolean(),
+  productUpdates: z.boolean(),
+  quietHours: z.object({
+    enabled: z.boolean(),
+    startHour: z.number().int().min(0).max(23),
+    endHour: z.number().int().min(0).max(23),
+    timezone: z.string().max(100),
+  }),
+  unsubscribedAllMarketing: z.boolean().optional().default(false),
+});
+
+export type NotificationPreferencesInput = z.infer<typeof NotificationPreferencesSchema>;
+
+/**
+ * Test Lifecycle Email Send Schema
+ */
+export const SendTestEmailSchema = z.object({
+  templateId: z.enum([
+    "welcome",
+    "email_verification",
+    "password_reset",
+    "receipt_invoice",
+    "trial_ending",
+    "payment_failed",
+    "subscription_cancelled",
+    "win_back",
+    "weekly_progress",
+    "streak_at_risk",
+    "milestone_congratulations",
+  ]),
+  recipientEmail: z.string().email("Invalid recipient email address").optional(),
+});
+
+export type SendTestEmailInput = z.infer<typeof SendTestEmailSchema>;
+
