@@ -1,6 +1,7 @@
 import { SrsCardState, DEFAULT_SRS_STATE, calculateSm2, isCardDue, ReviewRating } from "./sm2";
 import { VocabularyItem, LESSONS_DATABASE } from "./courseData";
 import { createClient } from "@/lib/supabase/client";
+import { enqueueOfflineAction, cacheFlashcardsForOffline, getCachedOfflineFlashcards } from "./offlineSyncService";
 
 export interface FlashcardItem {
   id: string;
@@ -234,7 +235,11 @@ export function getCardsForDeck(deckId: string): FlashcardItem[] {
 export function getDueCardsForDeck(deckId: string): FlashcardItem[] {
   const cards = getCardsForDeck(deckId);
   const now = new Date();
-  return cards.filter((c) => isCardDue(c.srsState.dueDate, now));
+  const due = cards.filter((c) => isCardDue(c.srsState.dueDate, now));
+  try {
+    cacheFlashcardsForOffline(deckId, due.length > 0 ? due : cards);
+  } catch {}
+  return due;
 }
 
 export function getTotalDueCardsCount(): number {
@@ -262,24 +267,11 @@ export function rateFlashcard(cardId: string, rating: ReviewRating): SrsCardStat
 
   saveAllFlashcards(cards);
 
-  // Sync with Supabase SRS reviews table if online
-  try {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) {
-        (supabase as any).from("srs_reviews").upsert({
-          user_id: user.id,
-          flashcard_id: cardId,
-          ease_factor: nextSrs.easeFactor,
-          interval_days: nextSrs.interval,
-          repetitions: nextSrs.repetitions,
-          due_date: nextSrs.dueDate,
-          last_reviewed_at: nextSrs.lastReviewedAt,
-          updated_at: new Date().toISOString(),
-        });
-      }
-    });
-  } catch {}
+  // Optimistic sync: enqueue action for immediate or background sync
+  enqueueOfflineAction("flashcard_review", {
+    cardId,
+    nextSrs,
+  });
 
   return nextSrs;
 }

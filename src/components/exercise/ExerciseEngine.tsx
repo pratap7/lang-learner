@@ -27,8 +27,13 @@ import { saveWordToMyWords, isWordSavedInMyWords } from "@/lib/flashcardService"
 import { appCopy } from "@/lib/appCopy";
 import { useAccessibility } from "@/lib/accessibility/AccessibilityContext";
 import { useI18n } from "@/lib/i18n/I18nContext";
-import { AccessibilitySettingsModal } from "@/components/ui/AccessibilitySettingsModal";
+import dynamic from "next/dynamic";
 import { Sliders } from "lucide-react";
+
+const AccessibilitySettingsModal = dynamic(
+  () => import("@/components/ui/AccessibilitySettingsModal").then((m) => m.AccessibilitySettingsModal),
+  { ssr: false }
+);
 
 // Renderers
 import { MultipleChoiceRenderer } from "./renderers/MultipleChoiceRenderer";

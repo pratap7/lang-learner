@@ -1,18 +1,47 @@
+import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/landing/Navbar";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { ProductDemoArea } from "@/components/landing/ProductDemoArea";
 import { SocialProofBar } from "@/components/landing/SocialProofBar";
-import { ComparisonTable } from "@/components/landing/ComparisonTable";
-import { FeatureShowcase } from "@/components/landing/FeatureShowcase";
-import { LearningJourney } from "@/components/landing/LearningJourney";
-import { LearnerPathways } from "@/components/landing/LearnerPathways";
-import { HowAITutorWorks } from "@/components/landing/HowAITutorWorks";
-import { PricingSection } from "@/components/landing/PricingSection";
-import { FAQSection } from "@/components/landing/FAQSection";
-import { CTABanner } from "@/components/landing/CTABanner";
 import { Footer } from "@/components/landing/Footer";
-import { StickyMobileCTA } from "@/components/landing/StickyMobileCTA";
+
+// Dynamically code-split below-the-fold sections to minimize mobile initial bundle size
+const ComparisonTable = dynamic(
+  () => import("@/components/landing/ComparisonTable").then((mod) => mod.ComparisonTable),
+  { ssr: true }
+);
+const FeatureShowcase = dynamic(
+  () => import("@/components/landing/FeatureShowcase").then((mod) => mod.FeatureShowcase),
+  { ssr: true }
+);
+const LearningJourney = dynamic(
+  () => import("@/components/landing/LearningJourney").then((mod) => mod.LearningJourney),
+  { ssr: true }
+);
+const LearnerPathways = dynamic(
+  () => import("@/components/landing/LearnerPathways").then((mod) => mod.LearnerPathways),
+  { ssr: true }
+);
+const HowAITutorWorks = dynamic(
+  () => import("@/components/landing/HowAITutorWorks").then((mod) => mod.HowAITutorWorks),
+  { ssr: true }
+);
+const PricingSection = dynamic(
+  () => import("@/components/landing/PricingSection").then((mod) => mod.PricingSection),
+  { ssr: true }
+);
+const FAQSection = dynamic(
+  () => import("@/components/landing/FAQSection").then((mod) => mod.FAQSection),
+  { ssr: true }
+);
+const CTABanner = dynamic(
+  () => import("@/components/landing/CTABanner").then((mod) => mod.CTABanner),
+  { ssr: true }
+);
+const StickyMobileCTA = dynamic(
+  () => import("@/components/landing/StickyMobileCTA").then((mod) => mod.StickyMobileCTA)
+);
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://deutschpfad.app"),

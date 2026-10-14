@@ -15,10 +15,15 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { ProgressRing } from "@/components/courses/ProgressRing";
 import { DashboardOverviewSkeleton } from "@/components/ui/Skeleton";
 import { useToast } from "@/components/ui/Toast";
+import dynamic from "next/dynamic";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
-import { AccessibilitySettingsModal } from "@/components/ui/AccessibilitySettingsModal";
 import { useI18n } from "@/lib/i18n/I18nContext";
 import { appCopy } from "@/lib/appCopy";
+
+const AccessibilitySettingsModal = dynamic(
+  () => import("@/components/ui/AccessibilitySettingsModal").then((m) => m.AccessibilitySettingsModal),
+  { ssr: false }
+);
 
 import {
   getDailyTasks,

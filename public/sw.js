@@ -1,10 +1,12 @@
 /* -----------------------------------------------------------------------------
-   DeutschPfad Service Worker — PWA & Offline Lesson Caching
+   DeutschPfad Service Worker (v2) — High-Performance Mobile Caching & Offline Sync
    ----------------------------------------------------------------------------- */
 
-const CACHE_NAME = "deutschpfad-cache-v1";
+const CACHE_VERSION = "deutschpfad-v2";
+const STATIC_CACHE = `${CACHE_VERSION}-static`;
+const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
-const PRECACHE_URLS = [
+const PRECACHE_ASSETS = [
   "/",
   "/dashboard",
   "/courses",
@@ -14,72 +16,95 @@ const PRECACHE_URLS = [
   "/practice",
   "/progress",
   "/goals",
-  "/leaderboard",
-  "/badges",
   "/manifest.json",
   "/icon-192.svg",
   "/icon-512.svg",
 ];
 
-// Install: pre-cache shell routes and assets
+// Install: pre-cache critical app shell routes and PWA manifests
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
-      .open(CACHE_NAME)
+      .open(STATIC_CACHE)
       .then((cache) => {
-        return cache.addAll(PRECACHE_URLS).catch((err) => {
-          console.warn("[SW] Some precache assets failed to load (normal in dev):", err);
+        return cache.addAll(PRECACHE_ASSETS).catch((err) => {
+          console.warn("[SW] Some precache assets failed to load (normal in development):", err);
         });
       })
       .then(() => self.skipWaiting())
   );
 });
 
-// Activate: clean up old versions
+// Activate: purge obsolete cache versions
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((cacheNames) => {
+      .then((keys) => {
         return Promise.all(
-          cacheNames.map((name) => {
-            if (name !== CACHE_NAME) {
-              return caches.delete(name);
-            }
-          })
+          keys
+            .filter((k) => k !== STATIC_CACHE && k !== DYNAMIC_CACHE)
+            .map((k) => caches.delete(k))
         );
       })
       .then(() => self.clients.claim())
   );
 });
 
-// Fetch handler: Stale-While-Revalidate & Offline lesson fallback
+// Fetch Strategy:
+// 1. Static chunks & fonts: Cache-First (immutable)
+// 2. Navigation / HTML pages: Stale-While-Revalidate with rich offline fallback
+// 3. API calls: Network-First with timeout fallback
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // Skip non-GET requests and non-http schemes
+  // Skip non-GET requests and non-http schemes (e.g. chrome-extension)
   if (req.method !== "GET" || !url.protocol.startsWith("http")) {
     return;
   }
 
-  // Handle HTML document navigation requests
+  // Strategy A: Static Next.js assets, SVG icons, and Fonts (Cache-First)
+  if (
+    url.pathname.startsWith("/_next/static/") ||
+    url.hostname.includes("fonts.gstatic.com") ||
+    url.pathname.endsWith(".svg") ||
+    url.pathname.endsWith(".png") ||
+    url.pathname.endsWith(".woff2")
+  ) {
+    event.respondWith(
+      caches.match(req).then((cached) => {
+        if (cached) return cached;
+        return fetch(req)
+          .then((networkRes) => {
+            if (networkRes && networkRes.status === 200) {
+              const clone = networkRes.clone();
+              caches.open(STATIC_CACHE).then((cache) => cache.put(req, clone));
+            }
+            return networkRes;
+          })
+          .catch(() => cached);
+      })
+    );
+    return;
+  }
+
+  // Strategy B: Page Navigations (HTML documents) - Stale-While-Revalidate
   if (req.mode === "navigate") {
     event.respondWith(
       fetch(req)
         .then((networkRes) => {
           if (networkRes && networkRes.status === 200) {
             const clone = networkRes.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
+            caches.open(DYNAMIC_CACHE).then((cache) => cache.put(req, clone));
           }
           return networkRes;
         })
         .catch(async () => {
-          // Offline fallback
-          const cachedRes = await caches.match(req);
-          if (cachedRes) return cachedRes;
+          const cachedPage = await caches.match(req);
+          if (cachedPage) return cachedPage;
 
-          // If requesting another lesson while offline, try closest cached course/lesson
+          // If requesting an offline lesson, try nearest cached lesson
           if (url.pathname.startsWith("/lesson/")) {
             const fallbackLesson = await caches.match("/lesson/a1-u1-l1");
             if (fallbackLesson) return fallbackLesson;
@@ -99,18 +124,26 @@ self.addEventListener("fetch", (event) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <title>Offline — DeutschPfad</title>
                 <style>
-                  body { background: #0b0f19; color: #f1f5f9; font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; padding: 20px; text-align: center; }
-                  .card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 32px; max-width: 420px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-                  h1 { margin-top: 0; font-size: 22px; }
-                  p { color: #94a3b8; font-size: 14px; line-height: 1.5; }
-                  a { display: inline-block; margin-top: 16px; padding: 10px 20px; background: #6366f1; color: white; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 14px; }
+                  body { background: #090D16; color: #F8FAFC; font-family: system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 24px; box-sizing: border-box; }
+                  .card { background: #111827; border: 1px solid #1E293B; border-radius: 20px; padding: 36px; max-width: 440px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+                  .icon { font-size: 38px; margin-bottom: 16px; }
+                  h1 { margin: 0 0 10px; font-size: 22px; font-weight: 700; color: #F8FAFC; }
+                  p { color: #94A3B8; font-size: 14px; line-height: 1.6; margin: 0 0 20px; }
+                  .btn-group { display: flex; flex-direction: column; gap: 10px; }
+                  a { display: block; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s; }
+                  .primary { background: linear-gradient(135deg, #4338CA, #6366F1); color: white; }
+                  .secondary { background: #1E293B; color: #CBD5E1; border: 1px solid #334155; }
                 </style>
               </head>
               <body>
                 <div class="card">
-                  <h1>📡 Du bist offline</h1>
-                  <p>You are currently offline. You can still access previously opened lessons, flashcards, and practice drills from your cached library.</p>
-                  <a href="/courses">Open Cached Courses</a>
+                  <div class="icon">📡</div>
+                  <h1>Offline-Modus Aktiv</h1>
+                  <p>You are currently disconnected. You can continue practicing cached lessons, flashcard reviews, and writing exercises.</p>
+                  <div class="btn-group">
+                    <a href="/courses/a1" class="primary">Open Offline Lesson</a>
+                    <a href="/flashcards" class="secondary">Review Flashcards</a>
+                  </div>
                 </div>
               </body>
             </html>`,
@@ -121,20 +154,29 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Handle static assets & API (Next.js chunks, fonts, images)
+  // Strategy C: Generic API & dynamic requests (Network with dynamic cache fallback)
   event.respondWith(
-    caches.match(req).then((cached) => {
-      const fetchPromise = fetch(req)
-        .then((networkRes) => {
-          if (networkRes && networkRes.status === 200 && networkRes.type === "basic") {
-            const clone = networkRes.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
-          }
-          return networkRes;
-        })
-        .catch(() => cached);
-
-      return cached || fetchPromise;
-    })
+    fetch(req)
+      .then((networkRes) => {
+        if (networkRes && networkRes.status === 200) {
+          const clone = networkRes.clone();
+          caches.open(DYNAMIC_CACHE).then((cache) => cache.put(req, clone));
+        }
+        return networkRes;
+      })
+      .catch(() => caches.match(req))
   );
+});
+
+// Background Sync handler
+self.addEventListener("sync", (event) => {
+  if (event.tag === "deutschpfad-sync" || event.tag === "sync-queue") {
+    event.waitUntil(
+      self.clients.matchAll().then((clients) => {
+        clients.forEach((client) => {
+          client.postMessage({ type: "DEUTSCHPFAD_TRIGGER_SYNC" });
+        });
+      })
+    );
+  }
 });

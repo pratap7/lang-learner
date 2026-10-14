@@ -12,8 +12,13 @@ import {
 } from "lucide-react";
 import { useAccessibility } from "@/lib/accessibility/AccessibilityContext";
 import { useI18n } from "@/lib/i18n/I18nContext";
-import { AccessibilitySettingsModal } from "@/components/ui/AccessibilitySettingsModal";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/Button";
+
+const AccessibilitySettingsModal = dynamic(
+  () => import("@/components/ui/AccessibilitySettingsModal").then((m) => m.AccessibilitySettingsModal),
+  { ssr: false }
+);
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useToast } from "@/components/ui/Toast";
@@ -40,6 +45,7 @@ import {
   playCompletionFanfare,
   playClickSound,
 } from "@/lib/soundEffects";
+import { cacheLessonForOffline, enqueueOfflineAction } from "@/lib/offlineSyncService";
 
 interface LessonPlayerProps {
   lessonId: string;
@@ -112,6 +118,9 @@ export function LessonPlayer({ lessonId }: LessonPlayerProps) {
         initialMap[v.german] = isWordSavedInMyWords(v.german);
       });
       setSavedWords(initialMap);
+      try {
+        cacheLessonForOffline(lessonId, lesson);
+      } catch {}
     }
 
     // Restore step if auto-saved within 24h
@@ -321,6 +330,17 @@ export function LessonPlayer({ lessonId }: LessonPlayerProps) {
     markLessonAsCompleted(lessonId);
     setCompleted(true);
     setShowSummary(true);
+
+    // Enqueue background sync mutation
+    try {
+      enqueueOfflineAction("lesson_completion", {
+        lessonId,
+        stats: {
+          xpEarned: lesson.xpReward,
+          accuracyPct: 100,
+        },
+      });
+    } catch {}
 
     // Clear auto-save resume key
     if (typeof window !== "undefined") {

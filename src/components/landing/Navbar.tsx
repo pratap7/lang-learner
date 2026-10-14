@@ -4,11 +4,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, Menu, X, Moon, Sun, Zap, User, Sparkles, Sliders } from "lucide-react";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/Button";
 import { AudioToggle } from "@/components/ui/AudioToggle";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
-import { AccessibilitySettingsModal } from "@/components/ui/AccessibilitySettingsModal";
 import { cn } from "@/lib/utils";
+
+const AccessibilitySettingsModal = dynamic(
+  () => import("@/components/ui/AccessibilitySettingsModal").then((m) => m.AccessibilitySettingsModal),
+  { ssr: false }
+);
 
 const navLinks = [
   { label: "Dashboard", href: "/dashboard" },

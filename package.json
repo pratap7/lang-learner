@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "test": "node --test src/lib/__tests__/*.test.ts",
@@ -27,6 +28,7 @@
     "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.4.0",
     "@tailwindcss/turbopack": "^4",
     "@types/jsdom": "^30.0.0",
     "@types/node": "^20",

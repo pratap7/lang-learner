@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WifiOff, Download, X } from "lucide-react";
+import { WifiOff, Download, X, RefreshCw } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
+import {
+  flushPendingSyncQueue,
+  getPendingSyncQueue,
+} from "@/lib/offlineSyncService";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -12,13 +16,16 @@ interface BeforeInstallPromptEvent extends Event {
 export function PwaRegister() {
   const { addToast } = useToast();
   const [isOffline, setIsOffline] = useState(false);
+  const [pendingCount, setPendingCount] = useState(0);
+  const [isSyncing, setIsSyncing] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
 
   useEffect(() => {
-    // Check initial online status
-    if (typeof window !== "undefined" && !navigator.onLine) {
-      setIsOffline(true);
+    // Check initial online & sync queue status
+    if (typeof window !== "undefined") {
+      setIsOffline(!navigator.onLine);
+      setPendingCount(getPendingSyncQueue().length);
     }
 
     // Register Service Worker
@@ -49,14 +56,29 @@ export function PwaRegister() {
       });
     }
 
-    // Connectivity status listeners
-    const handleOnline = () => {
+    // Connectivity status listeners & automatic sync
+    const handleOnline = async () => {
       setIsOffline(false);
-      addToast({
-        type: "success",
-        title: "Back Online",
-        message: "Your learning progress is synced with the cloud.",
-      });
+      setIsSyncing(true);
+      try {
+        const { syncedCount } = await flushPendingSyncQueue();
+        setPendingCount(getPendingSyncQueue().length);
+        if (syncedCount > 0) {
+          addToast({
+            type: "success",
+            title: "Back Online & Synced! 🚀",
+            message: `Successfully synced ${syncedCount} offline study action(s) to the cloud.`,
+          });
+        } else {
+          addToast({
+            type: "success",
+            title: "Back Online",
+            message: "Your learning progress is connected to the cloud.",
+          });
+        }
+      } finally {
+        setIsSyncing(false);
+      }
     };
 
     const handleOffline = () => {
@@ -68,8 +90,13 @@ export function PwaRegister() {
       });
     };
 
+    const handleQueueChange = (e: any) => {
+      setPendingCount(e?.detail?.count ?? getPendingSyncQueue().length);
+    };
+
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
+    window.addEventListener("deutschpfad:sync-queue-updated", handleQueueChange);
 
     // PWA Install prompt listener
     const handleBeforeInstall = (e: Event) => {
@@ -113,15 +140,27 @@ export function PwaRegister() {
 
   return (
     <>
-      {/* Offline Status Persistent Bar */}
+      {/* Offline Status Persistent Bar with Sync Counter */}
       {isOffline && (
         <aside
           role="status"
           aria-live="polite"
-          className="fixed bottom-4 left-4 z-50 flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-[var(--color-surface-2)] border border-[var(--color-warning)] text-[var(--color-warning)] shadow-lg backdrop-blur-md text-xs font-medium animate-pulse"
+          className="fixed bottom-4 left-4 z-50 flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-[var(--color-surface)]/95 border border-[var(--color-warning)] text-[var(--color-warning)] shadow-xl backdrop-blur-md text-xs font-semibold"
         >
-          <WifiOff size={14} />
-          <span>Offline Mode — Cached lessons available</span>
+          <WifiOff size={14} className="animate-pulse" />
+          <span>Offline Mode{pendingCount > 0 ? ` · ${pendingCount} queued` : " · Cached lessons ready"}</span>
+        </aside>
+      )}
+
+      {/* Syncing Active Indicator */}
+      {!isOffline && pendingCount > 0 && (
+        <aside
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-4 left-4 z-50 flex items-center gap-2 px-3.5 py-2 rounded-full bg-[var(--color-surface)]/95 border border-[var(--color-brand-500)] text-[var(--color-brand-400)] shadow-xl backdrop-blur-md text-xs font-semibold"
+        >
+          <RefreshCw size={14} className="animate-spin" />
+          <span>Syncing {pendingCount} offline study action(s)...</span>
         </aside>
       )}
 

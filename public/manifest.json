@@ -1,26 +1,66 @@
 {
   "name": "DeutschPfad — German Language Mastery",
   "short_name": "DeutschPfad",
+  "id": "/",
   "description": "Master German from A1 to C2 with CEFR structured courses, spaced-repetition flashcards, adaptive mock tests, and daily streaks.",
   "start_url": "/",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "portrait-primary",
   "background_color": "#0b0f19",
   "theme_color": "#6366f1",
-  "scope": "/",
   "categories": ["education", "books", "productivity"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icon-192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     },
     {
       "src": "/icon-512.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Continue Learning",
+      "short_name": "Learn",
+      "description": "Open your active German roadmap and lesson",
+      "url": "/courses",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Review Flashcards",
+      "short_name": "Flashcards",
+      "description": "Quick spaced-repetition vocabulary review",
+      "url": "/flashcards",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Practice Exercises",
+      "short_name": "Practice",
+      "description": "Adaptive grammar drills and exercises",
+      "url": "/practice",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
     }
   ]
 }

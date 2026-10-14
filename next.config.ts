@@ -1,9 +1,20 @@
 import type { NextConfig } from "next";
 
+const withBundleAnalyzer = process.env.ANALYZE === "true"
+  ? require("@next/bundle-analyzer")({ enabled: true })
+  : (config: NextConfig) => config;
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion", "recharts"],
+  },
   turbopack: {
     rules: {
       "*.css": {
@@ -14,4 +25,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
